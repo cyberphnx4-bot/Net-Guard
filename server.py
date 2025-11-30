@@ -40,6 +40,8 @@ from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from functools import lru_cache
 from io import BytesIO
+import ctypes
+import platform
 
 # ==================== LOGGING CONFIGURATION ====================
 
@@ -3203,9 +3205,50 @@ def print_banner():
     print(banner)
 
 
+def check_startup_requirements():
+    """Check if system requirements are met"""
+    # Check for root/admin privileges
+    is_admin = False
+    try:
+        if platform.system() == 'Windows':
+            is_admin = ctypes.windll.shell32.IsUserAnAdmin() != 0
+        else:
+            is_admin = os.geteuid() == 0
+    except:
+        pass
+
+    if not is_admin:
+        dns_port = app_state.config.get('dns', {}).get('port', 53)
+        if dns_port < 1024:
+            logger.error(f"Error: Root/Admin privileges required to bind to port {dns_port}")
+            print(f"\n[!] CRITICAL ERROR: Permission denied")
+            print(f"    NetGuard requires Administrator/Root privileges to bind to port {dns_port}.")
+            print(f"    Please run the terminal/command prompt as Administrator.\n")
+            sys.exit(1)
+
+    # Check if ports are available
+    dns_port = app_state.config.get('dns', {}).get('port', 53)
+    web_port = app_state.config.get('web', {}).get('port', 8080)
+
+    for port, name in [(dns_port, "DNS"), (web_port, "Web")]:
+        try:
+            sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM if name == "DNS" else socket.SOCK_STREAM)
+            sock.bind(('0.0.0.0', port))
+            sock.close()
+        except OSError as e:
+            logger.error(f"Error: Port {port} ({name}) is already in use")
+            print(f"\n[!] CRITICAL ERROR: Port {port} is busy")
+            print(f"    The {name} port ({port}) is currently in use by another application.")
+            print(f"    Please stop the conflicting application or change the port in config.\n")
+            sys.exit(1)
+
 def main():
+
     """Main entry point"""
     print_banner()
+    
+    # Check system requirements
+    check_startup_requirements()
     
     # Load configuration
     load_config()
