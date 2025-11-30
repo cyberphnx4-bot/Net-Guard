@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#2563eb">
     <meta name="description" content="NetGuard Enterprise - Multi-Router DNS Management System">
     <meta name="robots" content="noindex, nofollow">
-    
+
     <!-- SEC-001: Content Security Policy -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self';">
-    
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self';">
+
     <title>NetGuard Enterprise - DNS Management</title>
-    
+
     <!-- BUG-041: Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232563eb'><path d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z'/></svg>">
-    
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232563eb'><path d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z'/></svg>">
+
     <style>
         /*
          * NetGuard Enterprise - Frontend Styles
@@ -30,7 +33,9 @@
          */
 
         /* ==================== CSS RESET ==================== */
-        *, *::before, *::after {
+        *,
+        *::before,
+        *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -55,7 +60,7 @@
             --primary-700: #1d4ed8;
             --primary-800: #1e40af;
             --primary-900: #1e3a8a;
-            
+
             /* Semantic Colors */
             --success: #10b981;
             --success-light: #d1fae5;
@@ -69,12 +74,12 @@
             --info: #3b82f6;
             --info-light: #dbeafe;
             --info-dark: #2563eb;
-            
+
             /* Redirect action color */
             --redirect: #f97316;
             --redirect-light: #ffedd5;
             --redirect-dark: #ea580c;
-            
+
             /* Light Theme */
             --bg-base: #ffffff;
             --bg-surface: #f8fafc;
@@ -88,7 +93,7 @@
             --border: #e2e8f0;
             --border-light: #f1f5f9;
             --border-focus: #2563eb;
-            
+
             /* Shadows */
             --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
@@ -96,11 +101,11 @@
             --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
             --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
-            
+
             /* Typography */
             --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             --font-mono: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, monospace;
-            
+
             /* Spacing Scale */
             --space-0: 0;
             --space-1: 0.25rem;
@@ -114,7 +119,7 @@
             --space-12: 3rem;
             --space-16: 4rem;
             --space-20: 5rem;
-            
+
             /* Border Radius */
             --radius-sm: 0.375rem;
             --radius-md: 0.5rem;
@@ -122,12 +127,12 @@
             --radius-xl: 1rem;
             --radius-2xl: 1.5rem;
             --radius-full: 9999px;
-            
+
             /* Transitions */
             --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
             --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
             --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
-            
+
             /* Z-Index Scale */
             --z-dropdown: 100;
             --z-sticky: 200;
@@ -156,12 +161,18 @@
 
         /* BUG-046: Reduced motion */
         @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
+
+            *,
+            *::before,
+            *::after {
                 animation-duration: 0.01ms !important;
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
             }
-            html { scroll-behavior: auto; }
+
+            html {
+                scroll-behavior: auto;
+            }
         }
 
         /* ==================== BASE STYLES ==================== */
@@ -186,22 +197,39 @@
         }
 
         /* BUG-014: Focus visible styles */
-        :focus { outline: none; }
+        :focus {
+            outline: none;
+        }
+
         :focus-visible {
             outline: 2px solid var(--primary-500);
             outline-offset: 2px;
         }
 
         /* ==================== SCROLLBAR ==================== */
-        ::-webkit-scrollbar { width: 10px; height: 10px; }
-        ::-webkit-scrollbar-track { background: var(--bg-surface); }
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-surface);
+        }
+
         ::-webkit-scrollbar-thumb {
             background: var(--border);
             border-radius: var(--radius-full);
             border: 2px solid var(--bg-surface);
         }
-        ::-webkit-scrollbar-thumb:hover { background: var(--text-tertiary); }
-        * { scrollbar-width: thin; scrollbar-color: var(--border) var(--bg-surface); }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-tertiary);
+        }
+
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: var(--border) var(--bg-surface);
+        }
 
         /* ==================== LAYOUT ==================== */
         .app {
@@ -210,7 +238,9 @@
             flex-direction: column;
         }
 
-        .hidden { display: none !important; }
+        .hidden {
+            display: none !important;
+        }
 
         .sr-only {
             position: absolute;
@@ -267,11 +297,21 @@
             transition: transform var(--transition-base);
         }
 
-        .logo:hover .logo-icon { transform: scale(1.05); }
+        .logo:hover .logo-icon {
+            transform: scale(1.05);
+        }
 
-        .logo-icon svg { width: 24px; height: 24px; fill: white; }
+        .logo-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
 
-        .logo-text { font-size: 1.25rem; font-weight: 700; color: var(--text-primary); }
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
 
         .logo-badge {
             font-size: 0.625rem;
@@ -310,11 +350,22 @@
             gap: var(--space-2);
         }
 
-        .nav-link svg { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; }
+        .nav-link svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
 
-        .nav-link:hover { color: var(--primary-600); background: var(--bg-hover); }
+        .nav-link:hover {
+            color: var(--primary-600);
+            background: var(--bg-hover);
+        }
 
-        .nav-link.active { color: var(--primary-600); background: var(--primary-100); }
+        .nav-link.active {
+            color: var(--primary-600);
+            background: var(--primary-100);
+        }
 
         body.dark .nav-link.active {
             background: rgba(37, 99, 235, 0.2);
@@ -355,8 +406,15 @@
         }
 
         @keyframes pulse-dot {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-            50% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            }
+
+            50% {
+                box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+            }
         }
 
         .icon-btn {
@@ -373,9 +431,16 @@
             transition: all var(--transition-base);
         }
 
-        .icon-btn:hover { background: var(--bg-hover); color: var(--primary-600); }
+        .icon-btn:hover {
+            background: var(--bg-hover);
+            color: var(--primary-600);
+        }
 
-        .icon-btn svg { width: 20px; height: 20px; fill: currentColor; }
+        .icon-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
 
         /* BUG-058: Theme toggle animation */
         .icon-btn.theme-toggle svg {
@@ -390,7 +455,9 @@
             transform: rotate(180deg);
         }
 
-        .mobile-menu-btn { display: none; }
+        .mobile-menu-btn {
+            display: none;
+        }
 
         /* ==================== MAIN CONTENT ==================== */
         main {
@@ -406,11 +473,20 @@
             animation: fadeInUp 0.3s ease-out;
         }
 
-        .page.active { display: block; }
+        .page.active {
+            display: block;
+        }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .page-header {
@@ -422,7 +498,10 @@
             gap: var(--space-4);
         }
 
-        .page-header-content { flex: 1; min-width: 200px; }
+        .page-header-content {
+            flex: 1;
+            min-width: 200px;
+        }
 
         .page-title {
             font-size: 2rem;
@@ -431,7 +510,10 @@
             color: var(--text-primary);
         }
 
-        .page-description { color: var(--text-secondary); font-size: 1rem; }
+        .page-description {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
 
         /* BUG-060: Last updated timestamp */
         .last-updated {
@@ -474,7 +556,9 @@
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
 
-        .search-input::placeholder { color: var(--text-tertiary); }
+        .search-input::placeholder {
+            color: var(--text-tertiary);
+        }
 
         .search-icon {
             position: absolute;
@@ -504,11 +588,18 @@
             cursor: pointer;
         }
 
-        .search-clear:hover { background: var(--danger-light); color: var(--danger); }
+        .search-clear:hover {
+            background: var(--danger-light);
+            color: var(--danger);
+        }
 
-        .search-clear svg { width: 14px; height: 14px; fill: currentColor; }
+        .search-clear svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+        }
 
-        .search-input:not(:placeholder-shown) + .search-icon + .search-clear {
+        .search-input:not(:placeholder-shown)+.search-icon+.search-clear {
             display: flex;
         }
 
@@ -528,7 +619,9 @@
             display: none;
         }
 
-        .search-results.active { display: block; }
+        .search-results.active {
+            display: block;
+        }
 
         .search-results-section {
             padding: var(--space-2);
@@ -553,7 +646,9 @@
             transition: background var(--transition-fast);
         }
 
-        .search-result-item:hover { background: var(--bg-hover); }
+        .search-result-item:hover {
+            background: var(--bg-hover);
+        }
 
         .search-result-icon {
             width: 32px;
@@ -566,11 +661,20 @@
             flex-shrink: 0;
         }
 
-        body.dark .search-result-icon { background: rgba(37, 99, 235, 0.2); }
+        body.dark .search-result-icon {
+            background: rgba(37, 99, 235, 0.2);
+        }
 
-        .search-result-icon svg { width: 16px; height: 16px; fill: var(--primary-600); }
+        .search-result-icon svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--primary-600);
+        }
 
-        .search-result-content { flex: 1; min-width: 0; }
+        .search-result-content {
+            flex: 1;
+            min-width: 0;
+        }
 
         .search-result-name {
             font-weight: 600;
@@ -602,7 +706,9 @@
             transition: box-shadow var(--transition-base);
         }
 
-        .card:hover { box-shadow: var(--shadow-md); }
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
 
         .card-header {
             display: flex;
@@ -635,9 +741,15 @@
             flex-shrink: 0;
         }
 
-        body.dark .card-title-icon { background: rgba(37, 99, 235, 0.2); }
+        body.dark .card-title-icon {
+            background: rgba(37, 99, 235, 0.2);
+        }
 
-        .card-title-icon svg { width: 18px; height: 18px; fill: var(--primary-600); }
+        .card-title-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--primary-600);
+        }
 
         .card-actions {
             display: flex;
@@ -682,7 +794,9 @@
             transform: translateY(-4px);
         }
 
-        .stat-card:hover::before { transform: scaleX(1); }
+        .stat-card:hover::before {
+            transform: scaleX(1);
+        }
 
         .stat-header {
             display: flex;
@@ -691,7 +805,9 @@
             gap: var(--space-4);
         }
 
-        .stat-info { flex: 1; }
+        .stat-info {
+            flex: 1;
+        }
 
         .stat-icon {
             width: 48px;
@@ -705,12 +821,27 @@
             flex-shrink: 0;
         }
 
-        .stat-icon svg { width: 24px; height: 24px; fill: white; }
+        .stat-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
 
-        .stat-icon.danger { background: linear-gradient(135deg, var(--danger), var(--danger-dark)); }
-        .stat-icon.success { background: linear-gradient(135deg, var(--success), var(--success-dark)); }
-        .stat-icon.warning { background: linear-gradient(135deg, var(--warning), var(--warning-dark)); }
-        .stat-icon.info { background: linear-gradient(135deg, var(--info), var(--info-dark)); }
+        .stat-icon.danger {
+            background: linear-gradient(135deg, var(--danger), var(--danger-dark));
+        }
+
+        .stat-icon.success {
+            background: linear-gradient(135deg, var(--success), var(--success-dark));
+        }
+
+        .stat-icon.warning {
+            background: linear-gradient(135deg, var(--warning), var(--warning-dark));
+        }
+
+        .stat-icon.info {
+            background: linear-gradient(135deg, var(--info), var(--info-dark));
+        }
 
         .stat-label {
             font-size: 0.75rem;
@@ -729,7 +860,9 @@
             color: var(--text-primary);
         }
 
-        .stat-value.sm { font-size: 1.5rem; }
+        .stat-value.sm {
+            font-size: 1.5rem;
+        }
 
         .stat-subtitle {
             font-size: 0.8125rem;
@@ -747,8 +880,15 @@
             margin-top: var(--space-2);
         }
 
-        .stat-change.up { background: var(--success-light); color: var(--success-dark); }
-        .stat-change.down { background: var(--danger-light); color: var(--danger-dark); }
+        .stat-change.up {
+            background: var(--success-light);
+            color: var(--success-dark);
+        }
+
+        .stat-change.down {
+            background: var(--danger-light);
+            color: var(--danger-dark);
+        }
 
         /* ==================== BUTTONS ==================== */
         .btn {
@@ -776,7 +916,12 @@
             transform: none !important;
         }
 
-        .btn svg { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; }
+        .btn svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
 
         .btn-primary {
             background: linear-gradient(135deg, var(--primary-600), var(--primary-700));
@@ -807,7 +952,10 @@
             box-shadow: var(--shadow-sm);
         }
 
-        .btn-success:hover:not(:disabled) { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+        .btn-success:hover:not(:disabled) {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
 
         .btn-danger {
             background: linear-gradient(135deg, var(--danger), var(--danger-dark));
@@ -815,7 +963,10 @@
             box-shadow: var(--shadow-sm);
         }
 
-        .btn-danger:hover:not(:disabled) { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+        .btn-danger:hover:not(:disabled) {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
 
         .btn-warning {
             background: linear-gradient(135deg, var(--redirect), var(--redirect-dark));
@@ -823,22 +974,46 @@
             box-shadow: var(--shadow-sm);
         }
 
-        .btn-warning:hover:not(:disabled) { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+        .btn-warning:hover:not(:disabled) {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
 
         .btn-ghost {
             background: transparent;
             color: var(--text-secondary);
         }
 
-        .btn-ghost:hover:not(:disabled) { background: var(--bg-hover); color: var(--text-primary); }
+        .btn-ghost:hover:not(:disabled) {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
 
-        .btn-sm { padding: var(--space-2) var(--space-4); font-size: 0.8125rem; }
-        .btn-lg { padding: var(--space-4) var(--space-8); font-size: 1rem; }
+        .btn-sm {
+            padding: var(--space-2) var(--space-4);
+            font-size: 0.8125rem;
+        }
 
-        .btn-icon { width: 36px; height: 36px; padding: 0; }
-        .btn-icon.btn-sm { width: 32px; height: 32px; }
+        .btn-lg {
+            padding: var(--space-4) var(--space-8);
+            font-size: 1rem;
+        }
 
-        .btn-group { display: flex; gap: var(--space-2); }
+        .btn-icon {
+            width: 36px;
+            height: 36px;
+            padding: 0;
+        }
+
+        .btn-icon.btn-sm {
+            width: 32px;
+            height: 32px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: var(--space-2);
+        }
 
         /* BUG-013: Inline loading state for buttons */
         .btn.loading {
@@ -863,7 +1038,9 @@
         }
 
         /* ==================== FORMS ==================== */
-        .form-group { margin-bottom: var(--space-5); }
+        .form-group {
+            margin-bottom: var(--space-5);
+        }
 
         .form-label {
             display: block;
@@ -873,7 +1050,10 @@
             margin-bottom: var(--space-2);
         }
 
-        .form-label.required::after { content: ' *'; color: var(--danger); }
+        .form-label.required::after {
+            content: ' *';
+            color: var(--danger);
+        }
 
         .form-input,
         .form-select,
@@ -911,7 +1091,9 @@
             cursor: not-allowed;
         }
 
-        .form-input::placeholder { color: var(--text-tertiary); }
+        .form-input::placeholder {
+            color: var(--text-tertiary);
+        }
 
         .form-input.error,
         .form-select.error {
@@ -935,10 +1117,30 @@
             margin-top: var(--space-1);
         }
 
-        .form-row { display: grid; grid-template-columns: 1fr auto; gap: var(--space-4); align-items: end; }
-        .form-row-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
-        .form-row-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); }
-        .form-row-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4); }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: var(--space-4);
+            align-items: end;
+        }
+
+        .form-row-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-4);
+        }
+
+        .form-row-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-4);
+        }
+
+        .form-row-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-4);
+        }
 
         /* Checkbox styling */
         .checkbox-wrapper {
@@ -959,7 +1161,8 @@
             font-size: 0.9375rem;
             color: var(--text-primary);
             user-select: none;
-        } 
+        }
+
         /* ==================== ROUTER CARDS ==================== */
         .routers-grid {
             display: grid;
@@ -990,7 +1193,10 @@
             gap: var(--space-3);
         }
 
-        .router-card-info { flex: 1; min-width: 0; }
+        .router-card-info {
+            flex: 1;
+            min-width: 0;
+        }
 
         .router-card-info h3 {
             font-size: 1.125rem;
@@ -1021,20 +1227,52 @@
             flex-shrink: 0;
         }
 
-        .router-status-dot { width: 8px; height: 8px; border-radius: 50%; }
+        .router-status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
 
-        .router-status.active { background: var(--success-light); color: var(--success-dark); }
-        .router-status.active .router-status-dot { background: var(--success); animation: pulse-dot 2s ease-in-out infinite; }
+        .router-status.active {
+            background: var(--success-light);
+            color: var(--success-dark);
+        }
 
-        .router-status.inactive { background: var(--danger-light); color: var(--danger-dark); }
-        .router-status.inactive .router-status-dot { background: var(--danger); }
+        .router-status.active .router-status-dot {
+            background: var(--success);
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
 
-        .router-status.warning { background: var(--warning-light); color: var(--warning-dark); }
-        .router-status.warning .router-status-dot { background: var(--warning); animation: pulse-dot 1s ease-in-out infinite; }
+        .router-status.inactive {
+            background: var(--danger-light);
+            color: var(--danger-dark);
+        }
 
-        body.dark .router-status.active { background: rgba(16, 185, 129, 0.15); }
-        body.dark .router-status.inactive { background: rgba(239, 68, 68, 0.15); }
-        body.dark .router-status.warning { background: rgba(245, 158, 11, 0.15); }
+        .router-status.inactive .router-status-dot {
+            background: var(--danger);
+        }
+
+        .router-status.warning {
+            background: var(--warning-light);
+            color: var(--warning-dark);
+        }
+
+        .router-status.warning .router-status-dot {
+            background: var(--warning);
+            animation: pulse-dot 1s ease-in-out infinite;
+        }
+
+        body.dark .router-status.active {
+            background: rgba(16, 185, 129, 0.15);
+        }
+
+        body.dark .router-status.inactive {
+            background: rgba(239, 68, 68, 0.15);
+        }
+
+        body.dark .router-status.warning {
+            background: rgba(245, 158, 11, 0.15);
+        }
 
         .router-description {
             color: var(--text-secondary);
@@ -1052,9 +1290,16 @@
             border-top: 1px solid var(--border);
         }
 
-        .router-stat { text-align: center; }
+        .router-stat {
+            text-align: center;
+        }
 
-        .router-stat-value { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); line-height: 1; }
+        .router-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1;
+        }
 
         .router-stat-label {
             font-size: 0.6875rem;
@@ -1064,8 +1309,15 @@
             margin-top: var(--space-1);
         }
 
-        .router-actions { display: flex; gap: var(--space-2); margin-top: var(--space-4); }
-        .router-actions .btn { flex: 1; }
+        .router-actions {
+            display: flex;
+            gap: var(--space-2);
+            margin-top: var(--space-4);
+        }
+
+        .router-actions .btn {
+            flex: 1;
+        }
 
         /* ==================== TABLES ==================== */
         .table-container {
@@ -1113,16 +1365,35 @@
             vertical-align: middle;
         }
 
-        tbody tr { transition: background var(--transition-fast); }
-        tbody tr:hover { background: var(--bg-hover); }
-        tbody tr:last-child td { border-bottom: none; }
+        tbody tr {
+            transition: background var(--transition-fast);
+        }
+
+        tbody tr:hover {
+            background: var(--bg-hover);
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
 
         /* Selected row */
-        tbody tr.selected { background: var(--primary-50); }
-        body.dark tbody tr.selected { background: rgba(37, 99, 235, 0.1); }
+        tbody tr.selected {
+            background: var(--primary-50);
+        }
 
-        th.sortable { cursor: pointer; user-select: none; }
-        th.sortable:hover { color: var(--primary-600); }
+        body.dark tbody tr.selected {
+            background: rgba(37, 99, 235, 0.1);
+        }
+
+        th.sortable {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        th.sortable:hover {
+            color: var(--primary-600);
+        }
 
         /* ==================== BULK ACTIONS BAR ==================== */
         /* BUG-015: Bulk delete functionality */
@@ -1137,9 +1408,13 @@
             animation: fadeIn 0.2s ease-out;
         }
 
-        body.dark .bulk-actions-bar { background: rgba(37, 99, 235, 0.15); }
+        body.dark .bulk-actions-bar {
+            background: rgba(37, 99, 235, 0.15);
+        }
 
-        .bulk-actions-bar.active { display: flex; }
+        .bulk-actions-bar.active {
+            display: flex;
+        }
 
         .bulk-actions-info {
             display: flex;
@@ -1149,11 +1424,20 @@
             color: var(--primary-700);
         }
 
-        body.dark .bulk-actions-info { color: var(--primary-400); }
+        body.dark .bulk-actions-info {
+            color: var(--primary-400);
+        }
 
-        .bulk-actions-info svg { width: 20px; height: 20px; fill: currentColor; }
+        .bulk-actions-info svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
 
-        .bulk-actions-buttons { display: flex; gap: var(--space-2); }
+        .bulk-actions-buttons {
+            display: flex;
+            gap: var(--space-2);
+        }
 
         /* ==================== BADGES ==================== */
         .badge {
@@ -1169,22 +1453,74 @@
             white-space: nowrap;
         }
 
-        .badge-blocked { background: var(--danger-light); color: var(--danger-dark); }
-        .badge-allowed { background: var(--success-light); color: var(--success-dark); }
-        .badge-redirect { background: var(--redirect-light); color: var(--redirect-dark); }
-        .badge-cached { background: var(--info-light); color: var(--info-dark); }
-        .badge-forwarded { background: var(--bg-surface); color: var(--text-secondary); border: 1px solid var(--border); }
-        .badge-info { background: var(--info-light); color: var(--info-dark); }
-        .badge-warning { background: var(--warning-light); color: var(--warning-dark); }
-        .badge-success { background: var(--success-light); color: var(--success-dark); }
+        .badge-blocked {
+            background: var(--danger-light);
+            color: var(--danger-dark);
+        }
 
-        body.dark .badge-blocked { background: rgba(239, 68, 68, 0.15); }
-        body.dark .badge-allowed { background: rgba(16, 185, 129, 0.15); }
-        body.dark .badge-redirect { background: rgba(249, 115, 22, 0.15); }
-        body.dark .badge-cached { background: rgba(59, 130, 246, 0.15); }
-        body.dark .badge-info { background: rgba(59, 130, 246, 0.15); }
-        body.dark .badge-warning { background: rgba(245, 158, 11, 0.15); }
-        body.dark .badge-success { background: rgba(16, 185, 129, 0.15); }
+        .badge-allowed {
+            background: var(--success-light);
+            color: var(--success-dark);
+        }
+
+        .badge-redirect {
+            background: var(--redirect-light);
+            color: var(--redirect-dark);
+        }
+
+        .badge-cached {
+            background: var(--info-light);
+            color: var(--info-dark);
+        }
+
+        .badge-forwarded {
+            background: var(--bg-surface);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .badge-info {
+            background: var(--info-light);
+            color: var(--info-dark);
+        }
+
+        .badge-warning {
+            background: var(--warning-light);
+            color: var(--warning-dark);
+        }
+
+        .badge-success {
+            background: var(--success-light);
+            color: var(--success-dark);
+        }
+
+        body.dark .badge-blocked {
+            background: rgba(239, 68, 68, 0.15);
+        }
+
+        body.dark .badge-allowed {
+            background: rgba(16, 185, 129, 0.15);
+        }
+
+        body.dark .badge-redirect {
+            background: rgba(249, 115, 22, 0.15);
+        }
+
+        body.dark .badge-cached {
+            background: rgba(59, 130, 246, 0.15);
+        }
+
+        body.dark .badge-info {
+            background: rgba(59, 130, 246, 0.15);
+        }
+
+        body.dark .badge-warning {
+            background: rgba(245, 158, 11, 0.15);
+        }
+
+        body.dark .badge-success {
+            background: rgba(16, 185, 129, 0.15);
+        }
 
         code {
             font-family: var(--font-mono);
@@ -1211,7 +1547,10 @@
             transition: opacity var(--transition-base);
         }
 
-        .modal.active { display: flex; opacity: 1; }
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
 
         .modal-content {
             background: var(--bg-base);
@@ -1226,12 +1565,24 @@
             position: relative;
         }
 
-        .modal-content.lg { max-width: 800px; }
-        .modal-content.sm { max-width: 400px; }
+        .modal-content.lg {
+            max-width: 800px;
+        }
+
+        .modal-content.sm {
+            max-width: 400px;
+        }
 
         @keyframes modalSlideUp {
-            from { opacity: 0; transform: translateY(40px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
         .modal-header {
@@ -1243,7 +1594,11 @@
             border-bottom: 2px solid var(--border);
         }
 
-        .modal-title { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); }
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
 
         .modal-close {
             width: 36px;
@@ -1259,10 +1614,21 @@
             transition: all var(--transition-base);
         }
 
-        .modal-close:hover { background: var(--danger); color: white; transform: rotate(90deg); }
-        .modal-close svg { width: 20px; height: 20px; fill: currentColor; }
+        .modal-close:hover {
+            background: var(--danger);
+            color: white;
+            transform: rotate(90deg);
+        }
 
-        .modal-body { margin-bottom: var(--space-6); }
+        .modal-close svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .modal-body {
+            margin-bottom: var(--space-6);
+        }
 
         .modal-footer {
             padding-top: var(--space-6);
@@ -1300,25 +1666,62 @@
         }
 
         @keyframes toastSlideIn {
-            from { opacity: 0; transform: translateX(100%); }
-            to { opacity: 1; transform: translateX(0); }
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
-        .toast.removing { animation: toastSlideOut 0.3s ease-out forwards; }
+        .toast.removing {
+            animation: toastSlideOut 0.3s ease-out forwards;
+        }
 
         @keyframes toastSlideOut {
-            from { opacity: 1; transform: translateX(0); }
-            to { opacity: 0; transform: translateX(100%); }
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            to {
+                opacity: 0;
+                transform: translateX(100%);
+            }
         }
 
-        .toast-icon { width: 20px; height: 20px; flex-shrink: 0; margin-top: 2px; }
-        .toast-icon svg { width: 100%; height: 100%; fill: currentColor; }
+        .toast-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
 
-        .toast-content { flex: 1; min-width: 0; }
+        .toast-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: currentColor;
+        }
 
-        .toast-title { font-weight: 600; color: var(--text-primary); margin-bottom: var(--space-1); }
+        .toast-content {
+            flex: 1;
+            min-width: 0;
+        }
 
-        .toast-message { font-size: 0.9375rem; color: var(--text-secondary); word-wrap: break-word; }
+        .toast-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-1);
+        }
+
+        .toast-message {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            word-wrap: break-word;
+        }
 
         .toast-close {
             width: 24px;
@@ -1335,20 +1738,48 @@
             flex-shrink: 0;
         }
 
-        .toast-close:hover { background: var(--bg-hover); color: var(--danger); }
-        .toast-close svg { width: 16px; height: 16px; fill: currentColor; }
+        .toast-close:hover {
+            background: var(--bg-hover);
+            color: var(--danger);
+        }
 
-        .toast-success { border-left-color: var(--success); }
-        .toast-success .toast-icon { color: var(--success); }
+        .toast-close svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
 
-        .toast-error { border-left-color: var(--danger); }
-        .toast-error .toast-icon { color: var(--danger); }
+        .toast-success {
+            border-left-color: var(--success);
+        }
 
-        .toast-info { border-left-color: var(--info); }
-        .toast-info .toast-icon { color: var(--info); }
+        .toast-success .toast-icon {
+            color: var(--success);
+        }
 
-        .toast-warning { border-left-color: var(--warning); }
-        .toast-warning .toast-icon { color: var(--warning); }
+        .toast-error {
+            border-left-color: var(--danger);
+        }
+
+        .toast-error .toast-icon {
+            color: var(--danger);
+        }
+
+        .toast-info {
+            border-left-color: var(--info);
+        }
+
+        .toast-info .toast-icon {
+            color: var(--info);
+        }
+
+        .toast-warning {
+            border-left-color: var(--warning);
+        }
+
+        .toast-warning .toast-icon {
+            color: var(--warning);
+        }
 
         /* ==================== LOGIN PAGE ==================== */
         .login-container {
@@ -1382,10 +1813,23 @@
         }
 
         @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(-20px, 20px) rotate(5deg); }
-            50% { transform: translate(10px, -10px) rotate(-5deg); }
-            75% { transform: translate(-10px, -20px) rotate(3deg); }
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            25% {
+                transform: translate(-20px, 20px) rotate(5deg);
+            }
+
+            50% {
+                transform: translate(10px, -10px) rotate(-5deg);
+            }
+
+            75% {
+                transform: translate(-10px, -20px) rotate(3deg);
+            }
         }
 
         .login-card {
@@ -1401,11 +1845,21 @@
         }
 
         @keyframes loginCardIn {
-            from { opacity: 0; transform: scale(0.9) translateY(20px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
         }
 
-        .login-header { text-align: center; margin-bottom: var(--space-8); }
+        .login-header {
+            text-align: center;
+            margin-bottom: var(--space-8);
+        }
 
         .login-logo {
             width: 80px;
@@ -1419,10 +1873,23 @@
             box-shadow: var(--shadow-xl);
         }
 
-        .login-logo svg { width: 48px; height: 48px; fill: white; }
+        .login-logo svg {
+            width: 48px;
+            height: 48px;
+            fill: white;
+        }
 
-        .login-title { font-size: 1.75rem; font-weight: 800; color: var(--text-primary); margin-bottom: var(--space-2); }
-        .login-subtitle { color: var(--text-secondary); font-size: 0.9375rem; }
+        .login-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .login-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
 
         .login-footer {
             margin-top: var(--space-6);
@@ -1431,8 +1898,14 @@
             text-align: center;
         }
 
-        .login-footer p { font-size: 0.8125rem; color: var(--text-tertiary); }
-        .login-footer strong { color: var(--text-secondary); }
+        .login-footer p {
+            font-size: 0.8125rem;
+            color: var(--text-tertiary);
+        }
+
+        .login-footer strong {
+            color: var(--text-secondary);
+        }
 
         /* ==================== LOADING ==================== */
         .loading-overlay {
@@ -1448,7 +1921,9 @@
             gap: var(--space-4);
         }
 
-        .loading-overlay.active { display: flex; }
+        .loading-overlay.active {
+            display: flex;
+        }
 
         /* BUG-056: Fixed spinner styling */
         .spinner {
@@ -1460,20 +1935,40 @@
             animation: spin 0.8s linear infinite;
         }
 
-        .spinner.spinner-sm { width: 20px; height: 20px; border-width: 2px; }
-        .spinner.spinner-lg { width: 64px; height: 64px; border-width: 5px; }
+        .spinner.spinner-sm {
+            width: 20px;
+            height: 20px;
+            border-width: 2px;
+        }
+
+        .spinner.spinner-lg {
+            width: 64px;
+            height: 64px;
+            border-width: 5px;
+        }
 
         .spinner.spinner-primary {
             border-color: var(--primary-100);
             border-top-color: var(--primary-600);
         }
 
-        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
 
-        .loading-text { color: white; font-size: 0.9375rem; font-weight: 500; }
+        .loading-text {
+            color: white;
+            font-size: 0.9375rem;
+            font-weight: 500;
+        }
 
         /* ==================== EMPTY STATE ==================== */
-        .empty-state { text-align: center; padding: var(--space-12) var(--space-6); }
+        .empty-state {
+            text-align: center;
+            padding: var(--space-12) var(--space-6);
+        }
 
         .empty-state-icon {
             width: 80px;
@@ -1487,9 +1982,19 @@
             justify-content: center;
         }
 
-        .empty-state-icon svg { width: 40px; height: 40px; fill: var(--text-tertiary); opacity: 0.5; }
+        .empty-state-icon svg {
+            width: 40px;
+            height: 40px;
+            fill: var(--text-tertiary);
+            opacity: 0.5;
+        }
 
-        .empty-state-title { font-size: 1.125rem; font-weight: 700; color: var(--text-primary); margin-bottom: var(--space-2); }
+        .empty-state-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--space-2);
+        }
 
         .empty-state-description {
             color: var(--text-secondary);
@@ -1500,7 +2005,9 @@
         }
 
         /* ==================== SCOPE SELECTOR ==================== */
-        .scope-selector { margin-bottom: var(--space-6); }
+        .scope-selector {
+            margin-bottom: var(--space-6);
+        }
 
         .scope-options {
             display: grid;
@@ -1509,7 +2016,9 @@
             margin-bottom: var(--space-4);
         }
 
-        .scope-option { position: relative; }
+        .scope-option {
+            position: relative;
+        }
 
         .scope-option input[type="radio"] {
             position: absolute;
@@ -1534,18 +2043,20 @@
             text-align: center;
         }
 
-        .scope-option input[type="radio"]:hover + .scope-option-label { border-color: var(--primary-400); }
+        .scope-option input[type="radio"]:hover+.scope-option-label {
+            border-color: var(--primary-400);
+        }
 
-        .scope-option input[type="radio"]:checked + .scope-option-label {
+        .scope-option input[type="radio"]:checked+.scope-option-label {
             background: var(--primary-50);
             border-color: var(--primary-600);
         }
 
-        body.dark .scope-option input[type="radio"]:checked + .scope-option-label {
+        body.dark .scope-option input[type="radio"]:checked+.scope-option-label {
             background: rgba(37, 99, 235, 0.15);
         }
 
-        .scope-option input[type="radio"]:focus-visible + .scope-option-label {
+        .scope-option input[type="radio"]:focus-visible+.scope-option-label {
             outline: 2px solid var(--primary-500);
             outline-offset: 2px;
         }
@@ -1557,7 +2068,9 @@
             transition: fill var(--transition-base);
         }
 
-        .scope-option input[type="radio"]:checked + .scope-option-label svg { fill: var(--primary-600); }
+        .scope-option input[type="radio"]:checked+.scope-option-label svg {
+            fill: var(--primary-600);
+        }
 
         .scope-option-label span {
             font-weight: 600;
@@ -1566,14 +2079,35 @@
             transition: color var(--transition-base);
         }
 
-        .scope-option input[type="radio"]:checked + .scope-option-label span { color: var(--primary-600); }
+        .scope-option input[type="radio"]:checked+.scope-option-label span {
+            color: var(--primary-600);
+        }
 
-        .scope-option-desc { font-size: 0.6875rem; color: var(--text-tertiary); font-weight: 400; margin-top: var(--space-1); }
+        .scope-option-desc {
+            font-size: 0.6875rem;
+            color: var(--text-tertiary);
+            font-weight: 400;
+            margin-top: var(--space-1);
+        }
 
-        .router-selector { display: none; animation: fadeIn 0.2s ease-out; }
-        .router-selector.active { display: block; }
+        .router-selector {
+            display: none;
+            animation: fadeIn 0.2s ease-out;
+        }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .router-selector.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
 
         .router-checkboxes {
             display: grid;
@@ -1598,7 +2132,9 @@
             transition: background var(--transition-fast);
         }
 
-        .router-checkbox:hover { background: var(--bg-hover); }
+        .router-checkbox:hover {
+            background: var(--bg-hover);
+        }
 
         .router-checkbox input[type="checkbox"],
         .router-checkbox input[type="radio"] {
@@ -1619,11 +2155,21 @@
         }
 
         /* Redirect field */
-        .redirect-field { display: none; animation: fadeIn 0.2s ease-out; }
-        .redirect-field.active { display: block; }
+        .redirect-field {
+            display: none;
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        .redirect-field.active {
+            display: block;
+        }
 
         /* Router tags */
-        .router-tags { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+        .router-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+        }
 
         .router-tag {
             display: inline-flex;
@@ -1638,9 +2184,16 @@
             white-space: nowrap;
         }
 
-        body.dark .router-tag { background: rgba(37, 99, 235, 0.2); color: var(--primary-400); }
+        body.dark .router-tag {
+            background: rgba(37, 99, 235, 0.2);
+            color: var(--primary-400);
+        }
 
-        .router-tag svg { width: 12px; height: 12px; fill: currentColor; }
+        .router-tag svg {
+            width: 12px;
+            height: 12px;
+            fill: currentColor;
+        }
 
         /* ==================== FILTERS ==================== */
         .filters-bar {
@@ -1654,9 +2207,18 @@
             border: 1px solid var(--border);
         }
 
-        .filter-group { display: flex; align-items: center; gap: var(--space-2); }
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
 
-        .filter-label { font-size: 0.8125rem; font-weight: 600; color: var(--text-secondary); white-space: nowrap; }
+        .filter-label {
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            white-space: nowrap;
+        }
 
         .filter-input,
         .filter-select {
@@ -1670,9 +2232,17 @@
         }
 
         .filter-input:focus,
-        .filter-select:focus { outline: none; border-color: var(--primary-500); }
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--primary-500);
+        }
 
-        .filters-actions { margin-left: auto; display: flex; gap: var(--space-2); align-items: center; }
+        .filters-actions {
+            margin-left: auto;
+            display: flex;
+            gap: var(--space-2);
+            align-items: center;
+        }
 
         /* ==================== PAGINATION ==================== */
         .pagination {
@@ -1686,7 +2256,11 @@
             flex-wrap: wrap;
         }
 
-        .pagination-info { font-size: 0.875rem; color: var(--text-secondary); margin-right: auto; }
+        .pagination-info {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-right: auto;
+        }
 
         .pagination-btn {
             width: 36px;
@@ -1704,15 +2278,32 @@
             font-size: 0.875rem;
         }
 
-        .pagination-btn:hover:not(:disabled) { border-color: var(--primary-500); color: var(--primary-600); }
+        .pagination-btn:hover:not(:disabled) {
+            border-color: var(--primary-500);
+            color: var(--primary-600);
+        }
 
-        .pagination-btn.active { background: var(--primary-600); border-color: var(--primary-600); color: white; }
+        .pagination-btn.active {
+            background: var(--primary-600);
+            border-color: var(--primary-600);
+            color: white;
+        }
 
-        .pagination-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .pagination-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
 
-        .pagination-btn svg { width: 16px; height: 16px; fill: currentColor; }
+        .pagination-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
 
-        .pagination-pages { display: flex; gap: var(--space-1); }
+        .pagination-pages {
+            display: flex;
+            gap: var(--space-1);
+        }
 
         /* ==================== ANALYTICS STYLES ==================== */
         /* BUG-018: Enhanced analytics */
@@ -1736,7 +2327,11 @@
             margin-bottom: var(--space-4);
         }
 
-        .analytics-card-title { font-size: 1rem; font-weight: 700; color: var(--text-primary); }
+        .analytics-card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
 
         .analytics-chart {
             height: 200px;
@@ -1755,16 +2350,33 @@
             position: relative;
         }
 
-        .analytics-bar:hover { background: var(--primary-600); }
+        .analytics-bar:hover {
+            background: var(--primary-600);
+        }
 
-        .analytics-bar.blocked { background: var(--danger); }
-        .analytics-bar.blocked:hover { background: var(--danger-dark); }
+        .analytics-bar.blocked {
+            background: var(--danger);
+        }
 
-        .analytics-bar.allowed { background: var(--success); }
-        .analytics-bar.allowed:hover { background: var(--success-dark); }
+        .analytics-bar.blocked:hover {
+            background: var(--danger-dark);
+        }
 
-        .analytics-bar.cached { background: var(--info); }
-        .analytics-bar.cached:hover { background: var(--info-dark); }
+        .analytics-bar.allowed {
+            background: var(--success);
+        }
+
+        .analytics-bar.allowed:hover {
+            background: var(--success-dark);
+        }
+
+        .analytics-bar.cached {
+            background: var(--info);
+        }
+
+        .analytics-bar.cached:hover {
+            background: var(--info-dark);
+        }
 
         .router-analytics-item {
             padding: var(--space-6);
@@ -1780,7 +2392,11 @@
             margin-bottom: var(--space-4);
         }
 
-        .router-analytics-title { font-size: 1.125rem; font-weight: 700; color: var(--text-primary); }
+        .router-analytics-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
 
         .router-analytics-stats {
             display: grid;
@@ -1788,7 +2404,9 @@
             gap: var(--space-4);
         }
 
-        .router-analytics-stat { text-align: center; }
+        .router-analytics-stat {
+            text-align: center;
+        }
 
         .router-analytics-stat-value {
             font-size: 1.75rem;
@@ -1805,7 +2423,9 @@
             margin-top: var(--space-1);
         }
 
-        .top-domains-list { margin-top: var(--space-4); }
+        .top-domains-list {
+            margin-top: var(--space-4);
+        }
 
         .top-domain-item {
             display: flex;
@@ -1847,114 +2467,354 @@
 
         /* ==================== UTILITY CLASSES ==================== */
         /* BUG-048: Consolidated utility classes to avoid inline styles */
-        .text-success { color: var(--success) !important; }
-        .text-danger { color: var(--danger) !important; }
-        .text-warning { color: var(--warning) !important; }
-        .text-info { color: var(--info) !important; }
-        .text-muted { color: var(--text-secondary) !important; }
-        .text-tertiary { color: var(--text-tertiary) !important; }
-        .text-center { text-align: center; }
-        .text-right { text-align: right; }
-        .text-left { text-align: left; }
-        .text-sm { font-size: 0.875rem; }
-        .text-xs { font-size: 0.75rem; }
-        .text-lg { font-size: 1.125rem; }
+        .text-success {
+            color: var(--success) !important;
+        }
 
-        .font-bold { font-weight: 700; }
-        .font-semibold { font-weight: 600; }
-        .font-mono { font-family: var(--font-mono); }
+        .text-danger {
+            color: var(--danger) !important;
+        }
 
-        .flex { display: flex; }
-        .flex-col { flex-direction: column; }
-        .flex-wrap { flex-wrap: wrap; }
-        .items-center { align-items: center; }
-        .items-start { align-items: flex-start; }
-        .items-end { align-items: flex-end; }
-        .justify-between { justify-content: space-between; }
-        .justify-center { justify-content: center; }
-        .justify-end { justify-content: flex-end; }
-        .flex-1 { flex: 1; }
-        .flex-shrink-0 { flex-shrink: 0; }
+        .text-warning {
+            color: var(--warning) !important;
+        }
 
-        .gap-1 { gap: var(--space-1); }
-        .gap-2 { gap: var(--space-2); }
-        .gap-3 { gap: var(--space-3); }
-        .gap-4 { gap: var(--space-4); }
-        .gap-6 { gap: var(--space-6); }
-        .gap-8 { gap: var(--space-8); }
+        .text-info {
+            color: var(--info) !important;
+        }
 
-        .m-0 { margin: 0; }
-        .mt-1 { margin-top: var(--space-1); }
-        .mt-2 { margin-top: var(--space-2); }
-        .mt-4 { margin-top: var(--space-4); }
-        .mt-6 { margin-top: var(--space-6); }
-        .mb-1 { margin-bottom: var(--space-1); }
-        .mb-2 { margin-bottom: var(--space-2); }
-        .mb-4 { margin-bottom: var(--space-4); }
-        .mb-6 { margin-bottom: var(--space-6); }
-        .ml-auto { margin-left: auto; }
-        .mr-auto { margin-right: auto; }
+        .text-muted {
+            color: var(--text-secondary) !important;
+        }
 
-        .p-2 { padding: var(--space-2); }
-        .p-4 { padding: var(--space-4); }
-        .p-6 { padding: var(--space-6); }
-        .px-4 { padding-left: var(--space-4); padding-right: var(--space-4); }
-        .py-2 { padding-top: var(--space-2); padding-bottom: var(--space-2); }
+        .text-tertiary {
+            color: var(--text-tertiary) !important;
+        }
 
-        .w-full { width: 100%; }
-        .h-full { height: 100%; }
-        .min-w-0 { min-width: 0; }
+        .text-center {
+            text-align: center;
+        }
 
-        .rounded { border-radius: var(--radius-md); }
-        .rounded-lg { border-radius: var(--radius-lg); }
-        .rounded-xl { border-radius: var(--radius-xl); }
-        .rounded-full { border-radius: var(--radius-full); }
+        .text-right {
+            text-align: right;
+        }
 
-        .bg-surface { background: var(--bg-surface); }
-        .bg-base { background: var(--bg-base); }
+        .text-left {
+            text-align: left;
+        }
 
-        .border { border: 1px solid var(--border); }
-        .border-t { border-top: 1px solid var(--border); }
-        .border-b { border-bottom: 1px solid var(--border); }
+        .text-sm {
+            font-size: 0.875rem;
+        }
 
-        .overflow-hidden { overflow: hidden; }
-        .overflow-auto { overflow: auto; }
-        .truncate { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .text-xs {
+            font-size: 0.75rem;
+        }
 
-        .cursor-pointer { cursor: pointer; }
-        .select-none { user-select: none; }
-        .pointer-events-none { pointer-events: none; }
+        .text-lg {
+            font-size: 1.125rem;
+        }
 
-        .opacity-50 { opacity: 0.5; }
-        .opacity-75 { opacity: 0.75; }
+        .font-bold {
+            font-weight: 700;
+        }
 
-        .transition { transition: all var(--transition-base); }
+        .font-semibold {
+            font-weight: 600;
+        }
+
+        .font-mono {
+            font-family: var(--font-mono);
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        .flex-wrap {
+            flex-wrap: wrap;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .items-start {
+            align-items: flex-start;
+        }
+
+        .items-end {
+            align-items: flex-end;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .justify-end {
+            justify-content: flex-end;
+        }
+
+        .flex-1 {
+            flex: 1;
+        }
+
+        .flex-shrink-0 {
+            flex-shrink: 0;
+        }
+
+        .gap-1 {
+            gap: var(--space-1);
+        }
+
+        .gap-2 {
+            gap: var(--space-2);
+        }
+
+        .gap-3 {
+            gap: var(--space-3);
+        }
+
+        .gap-4 {
+            gap: var(--space-4);
+        }
+
+        .gap-6 {
+            gap: var(--space-6);
+        }
+
+        .gap-8 {
+            gap: var(--space-8);
+        }
+
+        .m-0 {
+            margin: 0;
+        }
+
+        .mt-1 {
+            margin-top: var(--space-1);
+        }
+
+        .mt-2 {
+            margin-top: var(--space-2);
+        }
+
+        .mt-4 {
+            margin-top: var(--space-4);
+        }
+
+        .mt-6 {
+            margin-top: var(--space-6);
+        }
+
+        .mb-1 {
+            margin-bottom: var(--space-1);
+        }
+
+        .mb-2 {
+            margin-bottom: var(--space-2);
+        }
+
+        .mb-4 {
+            margin-bottom: var(--space-4);
+        }
+
+        .mb-6 {
+            margin-bottom: var(--space-6);
+        }
+
+        .ml-auto {
+            margin-left: auto;
+        }
+
+        .mr-auto {
+            margin-right: auto;
+        }
+
+        .p-2 {
+            padding: var(--space-2);
+        }
+
+        .p-4 {
+            padding: var(--space-4);
+        }
+
+        .p-6 {
+            padding: var(--space-6);
+        }
+
+        .px-4 {
+            padding-left: var(--space-4);
+            padding-right: var(--space-4);
+        }
+
+        .py-2 {
+            padding-top: var(--space-2);
+            padding-bottom: var(--space-2);
+        }
+
+        .w-full {
+            width: 100%;
+        }
+
+        .h-full {
+            height: 100%;
+        }
+
+        .min-w-0 {
+            min-width: 0;
+        }
+
+        .rounded {
+            border-radius: var(--radius-md);
+        }
+
+        .rounded-lg {
+            border-radius: var(--radius-lg);
+        }
+
+        .rounded-xl {
+            border-radius: var(--radius-xl);
+        }
+
+        .rounded-full {
+            border-radius: var(--radius-full);
+        }
+
+        .bg-surface {
+            background: var(--bg-surface);
+        }
+
+        .bg-base {
+            background: var(--bg-base);
+        }
+
+        .border {
+            border: 1px solid var(--border);
+        }
+
+        .border-t {
+            border-top: 1px solid var(--border);
+        }
+
+        .border-b {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .overflow-hidden {
+            overflow: hidden;
+        }
+
+        .overflow-auto {
+            overflow: auto;
+        }
+
+        .truncate {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .cursor-pointer {
+            cursor: pointer;
+        }
+
+        .select-none {
+            user-select: none;
+        }
+
+        .pointer-events-none {
+            pointer-events: none;
+        }
+
+        .opacity-50 {
+            opacity: 0.5;
+        }
+
+        .opacity-75 {
+            opacity: 0.75;
+        }
+
+        .transition {
+            transition: all var(--transition-base);
+        }
 
         /* ==================== PRINT STYLES ==================== */
         @media print {
-            body { background: white !important; color: black !important; }
-            header, nav, .header-actions, .btn, .modal, .toast-container, .loading-overlay, 
-            .filters-bar, .pagination, .bulk-actions-bar { display: none !important; }
-            .card { box-shadow: none !important; border: 1px solid #ccc !important; break-inside: avoid; }
-            .page { display: block !important; }
-            a { text-decoration: underline; }
-            code { border: 1px solid #ccc; }
+            body {
+                background: white !important;
+                color: black !important;
+            }
+
+            header,
+            nav,
+            .header-actions,
+            .btn,
+            .modal,
+            .toast-container,
+            .loading-overlay,
+            .filters-bar,
+            .pagination,
+            .bulk-actions-bar {
+                display: none !important;
+            }
+
+            .card {
+                box-shadow: none !important;
+                border: 1px solid #ccc !important;
+                break-inside: avoid;
+            }
+
+            .page {
+                display: block !important;
+            }
+
+            a {
+                text-decoration: underline;
+            }
+
+            code {
+                border: 1px solid #ccc;
+            }
         }
 
         /* ==================== RESPONSIVE DESIGN ==================== */
         @media (max-width: 1200px) {
-            .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .analytics-grid { grid-template-columns: 1fr; }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .analytics-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 1024px) {
-            .routers-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
-            .form-row-3 { grid-template-columns: repeat(2, 1fr); }
-            .form-row-4 { grid-template-columns: repeat(2, 1fr); }
+            .routers-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+
+            .form-row-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .form-row-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 768px) {
-            .header-content { padding: 0 var(--space-4); }
+            .header-content {
+                padding: 0 var(--space-4);
+            }
 
             nav {
                 position: fixed;
@@ -1984,76 +2844,186 @@
                 pointer-events: all;
             }
 
-            .nav-link { width: 100%; justify-content: flex-start; padding: var(--space-3) var(--space-4); }
+            .nav-link {
+                width: 100%;
+                justify-content: flex-start;
+                padding: var(--space-3) var(--space-4);
+            }
 
-            .mobile-menu-btn { display: flex; }
+            .mobile-menu-btn {
+                display: flex;
+            }
 
-            .router-count { display: none; }
+            .router-count {
+                display: none;
+            }
 
-            .stats-grid { grid-template-columns: 1fr; }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
 
-            .routers-grid { grid-template-columns: 1fr; }
+            .routers-grid {
+                grid-template-columns: 1fr;
+            }
 
-            .form-row, .form-row-2, .form-row-3, .form-row-4 { grid-template-columns: 1fr; }
+            .form-row,
+            .form-row-2,
+            .form-row-3,
+            .form-row-4 {
+                grid-template-columns: 1fr;
+            }
 
-            main { padding: var(--space-6) var(--space-4); }
+            main {
+                padding: var(--space-6) var(--space-4);
+            }
 
-            .page-title { font-size: 1.5rem; }
+            .page-title {
+                font-size: 1.5rem;
+            }
 
-            .page-header { flex-direction: column; align-items: flex-start; }
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
 
-            .scope-options { grid-template-columns: 1fr; }
+            .scope-options {
+                grid-template-columns: 1fr;
+            }
 
-            .router-checkboxes { grid-template-columns: 1fr; }
+            .router-checkboxes {
+                grid-template-columns: 1fr;
+            }
 
-            .toast-container { left: var(--space-4); right: var(--space-4); max-width: none; }
+            .toast-container {
+                left: var(--space-4);
+                right: var(--space-4);
+                max-width: none;
+            }
 
-            table { font-size: 0.8125rem; }
+            table {
+                font-size: 0.8125rem;
+            }
 
-            th, td { padding: var(--space-3); }
+            th,
+            td {
+                padding: var(--space-3);
+            }
 
-            .filters-bar { flex-direction: column; }
+            .filters-bar {
+                flex-direction: column;
+            }
 
-            .filter-group { width: 100%; }
+            .filter-group {
+                width: 100%;
+            }
 
-            .filter-input, .filter-select { flex: 1; width: 100%; }
+            .filter-input,
+            .filter-select {
+                flex: 1;
+                width: 100%;
+            }
 
-            .filters-actions { margin-left: 0; width: 100%; justify-content: flex-end; }
+            .filters-actions {
+                margin-left: 0;
+                width: 100%;
+                justify-content: flex-end;
+            }
 
-            .pagination { justify-content: center; }
+            .pagination {
+                justify-content: center;
+            }
 
-            .pagination-info { width: 100%; text-align: center; margin-bottom: var(--space-3); margin-right: 0; }
+            .pagination-info {
+                width: 100%;
+                text-align: center;
+                margin-bottom: var(--space-3);
+                margin-right: 0;
+            }
 
-            .modal-content { padding: var(--space-6); margin: var(--space-4); }
+            .modal-content {
+                padding: var(--space-6);
+                margin: var(--space-4);
+            }
 
-            .login-card { padding: var(--space-6); }
+            .login-card {
+                padding: var(--space-6);
+            }
 
-            .search-box { max-width: none; }
+            .search-box {
+                max-width: none;
+            }
 
-            .bulk-actions-bar { flex-direction: column; gap: var(--space-3); text-align: center; }
-            .bulk-actions-buttons { width: 100%; justify-content: center; }
+            .bulk-actions-bar {
+                flex-direction: column;
+                gap: var(--space-3);
+                text-align: center;
+            }
+
+            .bulk-actions-buttons {
+                width: 100%;
+                justify-content: center;
+            }
         }
 
         @media (max-width: 480px) {
-            .logo-text { font-size: 1.125rem; }
-            .logo-icon { width: 36px; height: 36px; }
-            .logo-icon svg { width: 20px; height: 20px; }
-            .logo-badge { display: none; }
+            .logo-text {
+                font-size: 1.125rem;
+            }
 
-            .btn { padding: var(--space-2) var(--space-4); font-size: 0.875rem; }
+            .logo-icon {
+                width: 36px;
+                height: 36px;
+            }
 
-            .page-title { font-size: 1.25rem; }
+            .logo-icon svg {
+                width: 20px;
+                height: 20px;
+            }
 
-            .stat-value { font-size: 1.5rem; }
-            .stat-icon { width: 40px; height: 40px; }
-            .stat-icon svg { width: 20px; height: 20px; }
+            .logo-badge {
+                display: none;
+            }
 
-            .card { padding: var(--space-4); }
-            .card-header { flex-direction: column; align-items: flex-start; }
+            .btn {
+                padding: var(--space-2) var(--space-4);
+                font-size: 0.875rem;
+            }
 
-            .router-card { padding: var(--space-4); }
+            .page-title {
+                font-size: 1.25rem;
+            }
 
-            .router-stats { grid-template-columns: 1fr; gap: var(--space-3); }
+            .stat-value {
+                font-size: 1.5rem;
+            }
+
+            .stat-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .stat-icon svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .card {
+                padding: var(--space-4);
+            }
+
+            .card-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .router-card {
+                padding: var(--space-4);
+            }
+
+            .router-stats {
+                grid-template-columns: 1fr;
+                gap: var(--space-3);
+            }
 
             .router-stat {
                 display: flex;
@@ -2062,29 +3032,191 @@
                 text-align: left;
             }
 
-            .router-actions { flex-direction: column; }
+            .router-actions {
+                flex-direction: column;
+            }
 
-            .login-logo { width: 64px; height: 64px; }
-            .login-logo svg { width: 36px; height: 36px; }
-            .login-title { font-size: 1.5rem; }
+            .login-logo {
+                width: 64px;
+                height: 64px;
+            }
 
-            .router-analytics-stats { grid-template-columns: repeat(2, 1fr); }
+            .login-logo svg {
+                width: 36px;
+                height: 36px;
+            }
+
+            .login-title {
+                font-size: 1.5rem;
+            }
+
+            .router-analytics-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* ==================== HELP TOOLTIPS ==================== */
+        .help-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            background: var(--primary-500);
+            color: white;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: 8px;
+            vertical-align: middle;
+            transition: transform var(--transition-fast);
+        }
+
+        .help-icon:hover {
+            transform: scale(1.1);
+            background: var(--primary-600);
+        }
+
+        .help-tooltip {
+            position: absolute;
+            background: var(--bg-elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-4);
+            box-shadow: var(--shadow-lg);
+            width: 280px;
+            z-index: 100;
+            display: none;
+            animation: fadeIn 0.2s ease-out;
+        }
+
+        .help-tooltip.active {
+            display: block;
+        }
+
+        .help-tooltip::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 16px;
+            width: 12px;
+            height: 12px;
+            background: var(--bg-elevated);
+            border-left: 1px solid var(--border);
+            border-top: 1px solid var(--border);
+            transform: rotate(45deg);
+        }
+
+        .help-content {
+            position: relative;
+        }
+
+        .help-close {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: none;
+            border: none;
+            color: var(--text-tertiary);
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .help-close:hover {
+            color: var(--danger);
+        }
+
+        .help-text {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .help-tooltip {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                width: 100%;
+                border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+                padding: var(--space-6);
+                animation: slideUp 0.3s ease-out;
+            }
+
+            .help-tooltip::before {
+                display: none;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        /* ==================== VALIDATION ==================== */
+        .form-input.is-invalid,
+        .form-select.is-invalid {
+            border-color: var(--danger);
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5zM6 8.2a.3.3 0 110-.6.3.3 0 010 .6z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right calc(0.375em + 0.1875rem) center;
+            background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+            padding-right: calc(1.5em + 0.75rem);
+        }
+
+        .form-input.is-valid,
+        .form-select.is-valid {
+            border-color: var(--success);
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right calc(0.375em + 0.1875rem) center;
+            background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+            padding-right: calc(1.5em + 0.75rem);
+        }
+
+        .invalid-feedback {
+            display: none;
+            width: 100%;
+            margin-top: 0.25rem;
+            font-size: 0.875em;
+            color: var(--danger);
+        }
+
+        .is-invalid~.invalid-feedback {
+            display: block;
         }
 
         /* High resolution / 4K support */
         @media (min-width: 2560px) {
-            html { font-size: 18px; }
-            .header-content { max-width: 2000px; }
-            main { max-width: 2000px; }
+            html {
+                font-size: 18px;
+            }
+
+            .header-content {
+                max-width: 2000px;
+            }
+
+            main {
+                max-width: 2000px;
+            }
         }
     </style>
 </head>
+
 <body>
     <!-- BUG-042: Noscript fallback -->
     <noscript>
         <div style="padding: 40px; text-align: center; font-family: sans-serif;">
             <h1>JavaScript Required</h1>
-            <p>NetGuard Enterprise requires JavaScript to function. Please enable JavaScript in your browser settings.</p>
+            <p>NetGuard Enterprise requires JavaScript to function. Please enable JavaScript in your browser settings.
+            </p>
         </div>
     </noscript>
 
@@ -2103,32 +3235,35 @@
             <div class="login-header">
                 <div class="login-logo">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+                        <path
+                            d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" />
                     </svg>
                 </div>
                 <h1 class="login-title">NetGuard Enterprise</h1>
                 <p class="login-subtitle">Multi-Router DNS Management Platform</p>
             </div>
-            
+
             <form id="loginForm" autocomplete="on">
                 <div class="form-group">
                     <label class="form-label" for="loginUsername">Username</label>
-                    <input type="text" class="form-input" id="loginUsername" name="username" required 
-                           autocomplete="username" placeholder="Enter your username" maxlength="50" aria-required="true">
+                    <input type="text" class="form-input" id="loginUsername" name="username" required
+                        autocomplete="username" placeholder="Enter your username" maxlength="50" aria-required="true">
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="loginPassword">Password</label>
-                    <input type="password" class="form-input" id="loginPassword" name="password" required 
-                           autocomplete="current-password" placeholder="Enter your password" maxlength="100" aria-required="true">
+                    <input type="password" class="form-input" id="loginPassword" name="password" required
+                        autocomplete="current-password" placeholder="Enter your password" maxlength="100"
+                        aria-required="true">
                 </div>
                 <button type="submit" class="btn btn-primary btn-lg w-full" id="loginBtn">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M11 7L9.6 8.4l2.6 2.6H2v2h10.2l-2.6 2.6L11 17l5-5-5-5zm9 12h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-8v2h8v14z"/>
+                        <path
+                            d="M11 7L9.6 8.4l2.6 2.6H2v2h10.2l-2.6 2.6L11 17l5-5-5-5zm9 12h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-8v2h8v14z" />
                     </svg>
                     Sign In to Dashboard
                 </button>
             </form>
-            
+
             <div class="login-footer">
                 <p>Default credentials: <strong>admin / admin</strong></p>
             </div>
@@ -2143,7 +3278,8 @@
                 <a href="#dashboard" class="logo" role="button" aria-label="Go to Dashboard">
                     <div class="logo-icon">
                         <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/>
+                            <path
+                                d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z" />
                         </svg>
                     </div>
                     <div>
@@ -2152,34 +3288,38 @@
                     </div>
                 </a>
 
-                <button class="icon-btn mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+                <button class="icon-btn mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu"
+                    aria-expanded="false">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
                     </svg>
                 </button>
 
                 <nav id="mainNav" role="navigation" aria-label="Main navigation">
                     <a href="#dashboard" class="nav-link active" data-page="dashboard">
                         <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+                            <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z" />
                         </svg>
                         <span>Dashboard</span>
                     </a>
                     <a href="#routers" class="nav-link" data-page="routers">
                         <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/>
+                            <path
+                                d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z" />
                         </svg>
                         <span>Routers</span>
                     </a>
                     <a href="#rules" class="nav-link" data-page="rules">
                         <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z"/>
+                            <path
+                                d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z" />
                         </svg>
                         <span>DNS Rules</span>
                     </a>
                     <a href="#analytics" class="nav-link" data-page="analytics">
                         <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                            <path
+                                d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" />
                         </svg>
                         <span>Analytics</span>
                     </a>
@@ -2190,17 +3330,19 @@
                         <span class="router-count-dot" aria-hidden="true"></span>
                         <span id="routerCountText">0 Routers</span>
                     </div>
-                    
+
                     <!-- BUG-058: Theme toggle with animation class -->
                     <button class="icon-btn theme-toggle" id="themeToggleBtn" aria-label="Toggle dark mode">
                         <svg id="themeIcon" viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/>
+                            <path
+                                d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z" />
                         </svg>
                     </button>
-                    
+
                     <button class="btn btn-danger btn-sm" id="logoutBtn">
                         <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+                            <path
+                                d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z" />
                         </svg>
                         <span class="btn-text">Logout</span>
                     </button>
@@ -2215,10 +3357,14 @@
                 <div class="page-header">
                     <div class="page-header-content">
                         <h1 class="page-title">Dashboard</h1>
-                        <p class="page-description">Real-time overview of your DNS infrastructure and network activity</p>
+                        <p class="page-description">Real-time overview of your DNS infrastructure and network activity
+                        </p>
                         <!-- BUG-060: Last updated timestamp -->
                         <div class="last-updated" id="dashboardLastUpdated">
-                            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
+                            </svg>
                             <span>Last updated: <span id="lastUpdateTime">--</span></span>
                         </div>
                     </div>
@@ -2235,7 +3381,8 @@
                             </div>
                             <div class="stat-icon">
                                 <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                                    <path
+                                        d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" />
                                 </svg>
                             </div>
                         </div>
@@ -2250,7 +3397,8 @@
                             </div>
                             <div class="stat-icon danger">
                                 <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                    <path
+                                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                                 </svg>
                             </div>
                         </div>
@@ -2265,7 +3413,7 @@
                             </div>
                             <div class="stat-icon success">
                                 <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
                                 </svg>
                             </div>
                         </div>
@@ -2280,7 +3428,8 @@
                             </div>
                             <div class="stat-icon info">
                                 <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-14h2v7h-2zm0 8h2v2h-2z"/>
+                                    <path
+                                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-14h2v7h-2zm0 8h2v2h-2z" />
                                 </svg>
                             </div>
                         </div>
@@ -2293,7 +3442,8 @@
                         <h2 class="card-title">
                             <div class="card-title-icon">
                                 <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/>
+                                    <path
+                                        d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z" />
                                 </svg>
                             </div>
                             Live Query Log
@@ -2302,13 +3452,14 @@
                         <div class="card-actions">
                             <button class="btn btn-secondary btn-sm" id="refreshQueriesBtn">
                                 <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+                                    <path
+                                        d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" />
                                 </svg>
                                 Refresh
                             </button>
                         </div>
                     </div>
-                    
+
                     <!-- BUG-007: Filter bar for query logs -->
                     <div class="filters-bar" id="queryFilters">
                         <div class="filter-group">
@@ -2337,7 +3488,7 @@
                             <button class="btn btn-ghost btn-sm" id="clearFiltersBtn">Clear</button>
                         </div>
                     </div>
-                    
+
                     <div class="table-container">
                         <table id="queryLogTable">
                             <thead>
@@ -2364,16 +3515,20 @@
                             </tbody>
                         </table>
                     </div>
-                    
+
                     <!-- BUG-009: Pagination -->
                     <div class="pagination" id="queryPagination">
                         <span class="pagination-info" id="paginationInfo">Showing 0 of 0</span>
                         <button class="pagination-btn" id="prevPageBtn" disabled aria-label="Previous page">
-                            <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+                            <svg viewBox="0 0 24 24">
+                                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+                            </svg>
                         </button>
                         <div class="pagination-pages" id="paginationPages"></div>
                         <button class="pagination-btn" id="nextPageBtn" disabled aria-label="Next page">
-                            <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+                            <svg viewBox="0 0 24 24">
+                                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+                            </svg>
                         </button>
                     </div>
                 </div>
@@ -2389,9 +3544,15 @@
                     <!-- BUG-016: Search for routers -->
                     <div class="search-box" id="routerSearchBox">
                         <input type="text" class="search-input" id="routerSearchInput" placeholder="Search routers...">
-                        <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                        <svg class="search-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                        </svg>
                         <button class="search-clear" id="routerSearchClear" aria-label="Clear search">
-                            <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+                            </svg>
                         </button>
                     </div>
                 </div>
@@ -2402,7 +3563,7 @@
                         <h2 class="card-title">
                             <div class="card-title-icon">
                                 <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
                                 </svg>
                             </div>
                             Add New Router
@@ -2412,22 +3573,25 @@
                         <div class="form-row-3">
                             <div class="form-group">
                                 <label class="form-label required" for="routerName">Router Name</label>
-                                <input type="text" class="form-input" id="routerName" placeholder="e.g., Home Router" required maxlength="100">
+                                <input type="text" class="form-input" id="routerName" placeholder="e.g., Home Router"
+                                    required maxlength="100">
                                 <span class="form-hint">A friendly name for this router</span>
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="routerSubnet">Subnet (CIDR)</label>
-                                <input type="text" class="form-input" id="routerSubnet" placeholder="e.g., 192.168.1.0/24">
+                                <input type="text" class="form-input" id="routerSubnet" data-validate="cidr"
+                                    placeholder="e.g., 192.168.1.0/24">
                                 <span class="form-hint">Network range in CIDR notation</span>
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="routerDescription">Description</label>
-                                <input type="text" class="form-input" id="routerDescription" placeholder="e.g., Main home network" maxlength="255">
+                                <input type="text" class="form-input" id="routerDescription"
+                                    placeholder="e.g., Main home network" maxlength="255">
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary" id="addRouterBtn">
                             <svg viewBox="0 0 24 24" aria-hidden="true">
-                                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
                             </svg>
                             Add Router
                         </button>
@@ -2440,7 +3604,8 @@
                         <h2 class="card-title">
                             <div class="card-title-icon">
                                 <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/>
+                                    <path
+                                        d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z" />
                                 </svg>
                             </div>
                             Connected Routers
@@ -2448,7 +3613,8 @@
                         </h2>
                         <button class="btn btn-secondary btn-sm" id="refreshRoutersBtn">
                             <svg viewBox="0 0 24 24" aria-hidden="true">
-                                <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+                                <path
+                                    d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" />
                             </svg>
                             Refresh
                         </button>
@@ -2464,14 +3630,21 @@
                 <div class="page-header">
                     <div class="page-header-content">
                         <h1 class="page-title">DNS Rules Management</h1>
-                        <p class="page-description">Create granular DNS filtering rules with flexible router targeting</p>
+                        <p class="page-description">Create granular DNS filtering rules with flexible router targeting
+                        </p>
                     </div>
                     <!-- BUG-016: Search for rules -->
                     <div class="search-box" id="ruleSearchBox">
                         <input type="text" class="search-input" id="ruleSearchInput" placeholder="Search rules...">
-                        <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                        <svg class="search-icon" viewBox="0 0 24 24">
+                            <path
+                                d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                        </svg>
                         <button class="search-clear" id="ruleSearchClear" aria-label="Clear search">
-                            <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+                            </svg>
                         </button>
                     </div>
                 </div>
@@ -2482,45 +3655,57 @@
                         <h2 class="card-title">
                             <div class="card-title-icon">
                                 <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
                                 </svg>
                             </div>
-                            Create New Rule
+                            Add DNS Rule
+                            <span class="help-icon" data-help="add-rule">?</span>
                         </h2>
                     </div>
                     <form id="addRuleForm">
+                        <div class="form-group">
+                            <label class="form-label required" for="ruleDomain">
+                                Domain / Pattern
+                                <span class="help-icon" data-help="domain">?</span>
+                            </label>
+                            <input type="text" class="form-input" id="ruleDomain" required data-validate="domain"
+                                placeholder="e.g., example.com or *.ads.example.com" maxlength="253">
+                        </div>
+
                         <div class="form-row-2">
                             <div class="form-group">
-                                <label class="form-label required" for="ruleDomain">Domain / Pattern</label>
-                                <input type="text" class="form-input" id="ruleDomain" placeholder="e.g., ads.example.com or *.ads.com" required maxlength="253">
-                                <span class="form-hint">Supports wildcards: *.example.com, *ads*</span>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label required" for="ruleAction">Action</label>
+                                <label class="form-label required" for="ruleAction">
+                                    Action
+                                    <span class="help-icon" data-help="action">?</span>
+                                </label>
                                 <select class="form-select" id="ruleAction" required>
-                                    <option value="block">Block - Return 0.0.0.0</option>
-                                    <option value="allow">Allow - Bypass filtering</option>
-                                    <option value="redirect">Redirect - Custom IP</option>
+                                    <option value="block">Block</option>
+                                    <option value="allow">Allow</option>
+                                    <option value="redirect">Redirect</option>
                                 </select>
                             </div>
+                            <div class="form-group redirect-field" id="redirectField">
+                                <label class="form-label required" for="ruleRedirectIp">
+                                    Redirect IP
+                                    <span class="help-icon" data-help="redirect">?</span>
+                                </label>
+                                <input type="text" class="form-input" id="ruleRedirectIp" data-validate="ip"
+                                    placeholder="e.g., 192.168.1.100" maxlength="45">
+                            </div>
                         </div>
 
-                        <!-- Redirect IP field -->
-                        <div class="form-group redirect-field" id="redirectField">
-                            <label class="form-label required" for="ruleRedirectIp">Redirect IP Address</label>
-                            <input type="text" class="form-input" id="ruleRedirectIp" placeholder="e.g., 192.168.1.100" maxlength="45">
-                            <span class="form-hint">IP address to redirect matching domains to</span>
-                        </div>
-
-                        <!-- Scope selector with All, Specific, and Single options -->
                         <div class="scope-selector">
-                            <label class="form-label">Apply Rule To</label>
+                            <label class="form-label required">
+                                Router Scope
+                                <span class="help-icon" data-help="scope">?</span>
+                            </label>
                             <div class="scope-options">
                                 <div class="scope-option">
                                     <input type="radio" name="ruleScope" id="scopeAll" value="all" checked>
                                     <label class="scope-option-label" for="scopeAll">
                                         <svg viewBox="0 0 24 24" aria-hidden="true">
-                                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                            <path
+                                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                                         </svg>
                                         <span>All Routers</span>
                                         <span class="scope-option-desc">Global rule</span>
@@ -2530,7 +3715,8 @@
                                     <input type="radio" name="ruleScope" id="scopeSpecific" value="specific">
                                     <label class="scope-option-label" for="scopeSpecific">
                                         <svg viewBox="0 0 24 24" aria-hidden="true">
-                                            <path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9h-4v4h-2v-4H9V9h4V5h2v4h4v2z"/>
+                                            <path
+                                                d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9h-4v4h-2v-4H9V9h4V5h2v4h4v2z" />
                                         </svg>
                                         <span>Multiple Routers</span>
                                         <span class="scope-option-desc">Select multiple</span>
@@ -2540,7 +3726,8 @@
                                     <input type="radio" name="ruleScope" id="scopeSingle" value="single">
                                     <label class="scope-option-label" for="scopeSingle">
                                         <svg viewBox="0 0 24 24" aria-hidden="true">
-                                            <path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/>
+                                            <path
+                                                d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z" />
                                         </svg>
                                         <span>Single Router</span>
                                         <span class="scope-option-desc">One router only</span>
@@ -2548,25 +3735,29 @@
                                 </div>
                             </div>
 
-                            <div class="router-selector" id="routerSelectorMultiple">
+                            <!-- Router selectors container - shown/hidden based on scope -->
+                            <div class="router-selector" id="specificRoutersContainer" style="display: none;">
                                 <label class="form-label">Select Routers (one or more)</label>
-                                <div class="router-checkboxes" id="routerCheckboxes"></div>
+                                <div class="router-checkboxes" id="specificRoutersCheckboxes"></div>
                             </div>
 
-                            <div class="router-selector" id="routerSelectorSingle">
+                            <div class="router-selector" id="singleRouterContainer" style="display: none;">
                                 <label class="form-label">Select Router</label>
-                                <div class="router-checkboxes" id="routerRadios"></div>
+                                <select class="form-select" id="singleRouterSelect">
+                                    <option value="">Choose a router...</option>
+                                </select>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label" for="ruleDescription">Description (Optional)</label>
-                            <input type="text" class="form-input" id="ruleDescription" placeholder="Brief description of this rule" maxlength="255">
+                            <input type="text" class="form-input" id="ruleDescription"
+                                placeholder="Brief description of this rule" maxlength="255">
                         </div>
 
                         <button type="submit" class="btn btn-primary" id="addRuleBtn">
                             <svg viewBox="0 0 24 24" aria-hidden="true">
-                                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
                             </svg>
                             Create Rule
                         </button>
@@ -2579,27 +3770,30 @@
                         <h2 class="card-title">
                             <div class="card-title-icon">
                                 <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z"/>
+                                    <path
+                                        d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z" />
                                 </svg>
                             </div>
                             Active Rules
                             <span class="badge badge-info" id="rulesCount">0</span>
+                            <span class="help-icon" data-help="active-rules">?</span>
                         </h2>
                         <div class="card-actions">
                             <button class="btn btn-secondary btn-sm" id="refreshRulesBtn">
                                 <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+                                    <path
+                                        d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" />
                                 </svg>
                                 Refresh
                             </button>
                         </div>
                     </div>
-                    
+
                     <!-- BUG-008: Rules filter bar -->
                     <div class="filters-bar" id="rulesFilters">
                         <div class="filter-group">
-                            <label class="filter-label" for="filterRuleAction">Action:</label>
-                            <select class="filter-select" id="filterRuleAction">
+                            <label class="filter-label" for="filterByAction">Action:</label>
+                            <select class="filter-select" id="filterByAction">
                                 <option value="">All</option>
                                 <option value="block">Block</option>
                                 <option value="allow">Allow</option>
@@ -2607,31 +3801,35 @@
                             </select>
                         </div>
                         <div class="filter-group">
-                            <label class="filter-label" for="filterRuleScope">Scope:</label>
-                            <select class="filter-select" id="filterRuleScope">
-                                <option value="">All</option>
-                                <option value="all">Global</option>
-                                <option value="specific">Multiple</option>
-                                <option value="single">Single</option>
+                            <label class="filter-label" for="filterByRouter">Router:</label>
+                            <select class="filter-select" id="filterByRouter">
+                                <option value="">All Routers</option>
                             </select>
                         </div>
+                        <span class="help-icon" data-help="filters">?</span>
                     </div>
 
                     <!-- BUG-015: Bulk actions bar -->
                     <div class="bulk-actions-bar" id="bulkActionsBar">
                         <div class="bulk-actions-info">
-                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                            <svg viewBox="0 0 24 24">
+                                <path
+                                    d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                            </svg>
                             <span><span id="selectedCount">0</span> rules selected</span>
                         </div>
                         <div class="bulk-actions-buttons">
                             <button class="btn btn-ghost btn-sm" id="clearSelectionBtn">Clear Selection</button>
                             <button class="btn btn-danger btn-sm" id="bulkDeleteBtn">
-                                <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
+                                </svg>
                                 Delete Selected
                             </button>
                         </div>
                     </div>
-                    
+
                     <div class="table-container">
                         <table id="rulesTable">
                             <thead>
@@ -2668,7 +3866,8 @@
                     <div class="card-actions">
                         <button class="btn btn-secondary btn-sm" id="refreshAnalyticsBtn">
                             <svg viewBox="0 0 24 24" aria-hidden="true">
-                                <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+                                <path
+                                    d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" />
                             </svg>
                             Refresh
                         </button>
@@ -2684,7 +3883,10 @@
                                 <div class="stat-value sm" id="statUptime">0h 0m</div>
                             </div>
                             <div class="stat-icon">
-                                <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
+                                </svg>
                             </div>
                         </div>
                     </div>
@@ -2696,7 +3898,10 @@
                                 <div class="stat-subtitle">entries cached</div>
                             </div>
                             <div class="stat-icon info">
-                                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
+                                </svg>
                             </div>
                         </div>
                     </div>
@@ -2707,7 +3912,10 @@
                                 <div class="stat-value sm" id="statActiveSessions">0</div>
                             </div>
                             <div class="stat-icon success">
-                                <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                                <svg viewBox="0 0 24 24">
+                                    <path
+                                        d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
+                                </svg>
                             </div>
                         </div>
                     </div>
@@ -2719,7 +3927,9 @@
                                 <div class="stat-subtitle">queries redirected</div>
                             </div>
                             <div class="stat-icon warning">
-                                <svg viewBox="0 0 24 24"><path d="M19 15l-6 6-1.42-1.42L15.17 16H4V4h2v10h9.17l-3.59-3.58L13 9l6 6z"/></svg>
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M19 15l-6 6-1.42-1.42L15.17 16H4V4h2v10h9.17l-3.59-3.58L13 9l6 6z" />
+                                </svg>
                             </div>
                         </div>
                     </div>
@@ -2731,7 +3941,8 @@
                         <h2 class="card-title">
                             <div class="card-title-icon">
                                 <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/>
+                                    <path
+                                        d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z" />
                                 </svg>
                             </div>
                             Per-Router Analytics
@@ -2748,7 +3959,7 @@
                         <h2 class="card-title">
                             <div class="card-title-icon">
                                 <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
+                                    <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z" />
                                 </svg>
                             </div>
                             Top Queried Domains
@@ -2765,16 +3976,18 @@
                         <h2 class="card-title">
                             <div class="card-title-icon">
                                 <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                                    <path
+                                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
                                 </svg>
                             </div>
                             Cache Management
                         </h2>
                     </div>
-                    <p class="mb-4 text-muted">Clear the DNS cache to force fresh lookups for all domains. This will also clear cached rules.</p>
+                    <p class="mb-4 text-muted">Clear the DNS cache to force fresh lookups for all domains. This will
+                        also clear cached rules.</p>
                     <button class="btn btn-warning" id="clearCacheBtn">
                         <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+                            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
                         </svg>
                         Clear DNS Cache
                     </button>
@@ -2784,7 +3997,7 @@
     </div>
 
     <!-- ==================== MODALS ==================== -->
-    
+
     <!-- Edit Router Modal -->
     <div class="modal" id="editRouterModal" role="dialog" aria-labelledby="editRouterTitle" aria-modal="true">
         <div class="modal-content">
@@ -2792,7 +4005,8 @@
                 <h3 class="modal-title" id="editRouterTitle">Edit Router</h3>
                 <button class="modal-close" id="closeEditRouterModal" aria-label="Close modal">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                        <path
+                            d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
                     </svg>
                 </button>
             </div>
@@ -2804,7 +4018,8 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="editRouterSubnet">Subnet (CIDR)</label>
-                    <input type="text" class="form-input" id="editRouterSubnet" placeholder="e.g., 192.168.1.0/24">
+                    <input type="text" class="form-input" id="editRouterSubnet" data-validate="cidr"
+                        placeholder="e.g., 192.168.1.0/24">
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="editRouterDescription">Description</label>
@@ -2825,7 +4040,8 @@
                 <h3 class="modal-title" id="editRuleTitle">Edit Rule</h3>
                 <button class="modal-close" id="closeEditRuleModal" aria-label="Close modal">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                        <path
+                            d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
                     </svg>
                 </button>
             </div>
@@ -2833,7 +4049,8 @@
                 <input type="hidden" id="editRuleId">
                 <div class="form-group">
                     <label class="form-label required" for="editRuleDomain">Domain / Pattern</label>
-                    <input type="text" class="form-input" id="editRuleDomain" required maxlength="253">
+                    <input type="text" class="form-input" id="editRuleDomain" required maxlength="253"
+                        data-validate="domain">
                 </div>
                 <div class="form-row-2">
                     <div class="form-group">
@@ -2846,7 +4063,7 @@
                     </div>
                     <div class="form-group" id="editRedirectField">
                         <label class="form-label" for="editRuleRedirectIp">Redirect IP</label>
-                        <input type="text" class="form-input" id="editRuleRedirectIp" maxlength="45">
+                        <input type="text" class="form-input" id="editRuleRedirectIp" maxlength="45" data-validate="ip">
                     </div>
                 </div>
                 <div class="form-group">
@@ -2874,7 +4091,8 @@
                 <h3 class="modal-title" id="confirmTitle">Confirm Action</h3>
                 <button class="modal-close" id="closeConfirmModal" aria-label="Close modal">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                        <path
+                            d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
                     </svg>
                 </button>
             </div>
@@ -2888,3 +4106,1389 @@
         </div>
     </div>
 
+    <!-- ==================== HELP TOOLTIPS ==================== -->
+
+    <div class="help-tooltip" id="help-add-rule">
+        <div class="help-content">
+            <button class="help-close">×</button>
+            <div class="help-text">
+                <strong>Add DNS Rule</strong><br>
+                Create rules to control access to specific domains. You can block ads, allow specific sites, or redirect
+                traffic to a different IP address.
+            </div>
+        </div>
+    </div>
+
+    <div class="help-tooltip" id="help-domain">
+        <div class="help-content">
+            <button class="help-close">×</button>
+            <div class="help-text">
+                <strong>Domain / Pattern</strong><br>
+                Enter the domain name (e.g., example.com). Use * as a wildcard for subdomains (e.g., *.ads.example.com
+                matches all subdomains of ads.example.com).
+            </div>
+        </div>
+    </div>
+
+    <div class="help-tooltip" id="help-action">
+        <div class="help-content">
+            <button class="help-close">×</button>
+            <div class="help-text">
+                <strong>Action</strong><br>
+                • <strong>Block:</strong> Prevents access (returns 0.0.0.0)<br>
+                • <strong>Allow:</strong> Permits access (bypasses other rules)<br>
+                • <strong>Redirect:</strong> Sends traffic to a specific IP
+            </div>
+        </div>
+    </div>
+
+    <div class="help-tooltip" id="help-redirect">
+        <div class="help-content">
+            <button class="help-close">×</button>
+            <div class="help-text">
+                <strong>Redirect IP</strong><br>
+                Enter the local or public IP address where you want to send the traffic. Useful for setting up local
+                servers or captive portals.
+            </div>
+        </div>
+    </div>
+
+    <div class="help-tooltip" id="help-scope">
+        <div class="help-content">
+            <button class="help-close">×</button>
+            <div class="help-text">
+                <strong>Router Scope</strong><br>
+                • <strong>All Routers:</strong> Rule applies to the entire network<br>
+                • <strong>Specific:</strong> Select multiple routers<br>
+                • <strong>Single:</strong> Apply to just one router
+            </div>
+        </div>
+    </div>
+
+    <div class="help-tooltip" id="help-active-rules">
+        <div class="help-content">
+            <button class="help-close">×</button>
+            <div class="help-text">
+                <strong>Active Rules</strong><br>
+                Manage your existing DNS rules here. You can edit, delete, or temporarily disable rules. Use the filters
+                to find specific rules.
+            </div>
+        </div>
+    </div>
+
+    <div class="help-tooltip" id="help-filters">
+        <div class="help-content">
+            <button class="help-close">×</button>
+            <div class="help-text">
+                <strong>Filters</strong><br>
+                Narrow down the list by Action (Block/Allow) or Router. Use the search bar to find rules by domain name.
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+        <div class="spinner spinner-primary"></div>
+    </div>
+
+    <!-- ==================== JAVASCRIPT ==================== -->
+    <script>
+        /*
+         * NetGuard Enterprise - Frontend JavaScript
+         * Version: 3.2.0 - Complete Implementation
+         * 
+         * Features:
+         * - Authentication & session management
+         * - Dashboard with real-time stats
+         * - Router management (CRUD)
+         * - Granular DNS rules (3 scopes: all/specific/single, 3 actions: block/allow/redirect)
+         * - Query logs with filtering and pagination
+         * - Form validation
+         * - Error handling
+         */
+
+        // ==================== GLOBAL STATE ====================
+        const APP_STATE = {
+            user: null,
+            token: null,
+            csrfToken: null,
+            currentPage: 'dashboard',
+            routers: [],
+            rules: [],
+            logs: [],
+            stats: {},
+            theme: localStorage.getItem('theme') || 'light',
+            currentLogPage: 1,
+            logsPerPage: 50,
+            totalLogs: 0
+        };
+
+        const API_BASE = '';  // Same origin
+
+        // ==================== UTILITY FUNCTIONS ====================
+
+        // DOM helpers
+        const $ = (selector) => document.querySelector(selector);
+        const $$ = (selector) => document.querySelectorAll(selector);
+
+        // Date formatting
+        function formatDate(timestamp) {
+            const date = new Date(timestamp * 1000);
+            return date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+        }
+
+        function formatRelativeTime(timestamp) {
+            const seconds = Math.floor(Date.now() / 1000 - timestamp);
+            if (seconds < 60) return 'Just now';
+            if (seconds < 3600) return Math.floor(seconds / 60) + 'm ago';
+            if (seconds < 86400) return Math.floor(seconds / 3600) + 'h ago';
+            return Math.floor(seconds / 86400) + 'd ago';
+        }
+
+        // Number formatting
+        function formatNumber(num) {
+            return new Intl.NumberFormat().format(num);
+        }
+
+        // Debounce function
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+        }
+
+        // Validation functions
+        function validateDomain(domain) {
+            if (!domain || domain.length > 253) return false;
+            const cleanDomain = domain.replace(/^\*\./, '');
+            const pattern = /^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?(\.[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?)*$/;
+            return pattern.test(cleanDomain) || domain === '*';
+        }
+
+        function validateIP(ip) {
+            // IPv4
+            const ipv4Pattern = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+            // IPv6 (simplified)
+            const ipv6Pattern = /^(([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|::)$/;
+            return ipv4Pattern.test(ip) || ipv6Pattern.test(ip);
+        }
+
+        function validateCIDR(cidr) {
+            const parts = cidr.split('/');
+            if (parts.length !== 2) return false;
+            if (!validateIP(parts[0])) return false;
+            const prefix = parseInt(parts[1]);
+            return prefix >= 0 && prefix <= 32;
+        }
+
+        // ==================== API LAYER ====================
+
+        async function apiCall(endpoint, options = {}) {
+            const headers = {
+                'Content-Type': 'application/json',
+                ...options.headers
+            };
+
+            if (APP_STATE.token) {
+                headers['Authorization'] = `Bearer ${APP_STATE.token}`;
+            }
+
+            if (APP_STATE.csrfToken && (options.method === 'POST' || options.method === 'PUT' || options.method === 'DELETE')) {
+                headers['X-CSRF-Token'] = APP_STATE.csrfToken;
+            }
+
+            try {
+                const response = await fetch(API_BASE + endpoint, {
+                    ...options,
+                    headers
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        handleLogout();
+                        throw new Error('Session expired. Please login again.');
+                    }
+                    throw new Error(data.error || 'Request failed');
+                }
+
+                return data;
+            } catch (error) {
+                console.error('API Error:', error);
+                throw error;
+            }
+        }
+
+        // ==================== AUTHENTICATION ====================
+
+        async function handleLogin(e) {
+            e.preventDefault();
+
+            const username = $('#loginUsername').value.trim();
+            const password = $('#loginPassword').value;
+            const remember = $('#rememberMe').checked;
+
+            if (!username || !password) {
+                showToast('Please enter username and password', 'error');
+                return;
+            }
+
+            showLoading();
+
+            try {
+                const data = await apiCall('/api/auth/login', {
+                    method: 'POST',
+                    body: JSON.stringify({ username, password, remember })
+                });
+
+                APP_STATE.token = data.token;
+                APP_STATE.csrfToken = data.csrf_token;
+                APP_STATE.user = { username };
+
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('csrf_token', data.csrf_token);
+
+                hideLoading();
+                $('#loginPage').classList.add('hidden');
+                $('#appContainer').classList.remove('hidden');
+
+                showPage('dashboard');
+                loadDashboard();
+                showToast('Welcome back, ' + username + '!', 'success');
+            } catch (error) {
+                hideLoading();
+                showToast(error.message || 'Login failed', 'error');
+            }
+        }
+
+        function handleLogout() {
+            APP_STATE.token = null;
+            APP_STATE.csrfToken = null;
+            APP_STATE.user = null;
+
+            localStorage.removeItem('token');
+            localStorage.removeItem('csrf_token');
+
+            $('#appContainer').classList.add('hidden');
+            $('#loginPage').classList.remove('hidden');
+
+            // Reset form
+            $('#loginForm').reset();
+        }
+
+        async function checkAuth() {
+            const token = localStorage.getItem('token');
+            const csrfToken = localStorage.getItem('csrf_token');
+
+            if (!token) {
+                $('#loginPage').classList.remove('hidden');
+                return false;
+            }
+
+            APP_STATE.token = token;
+            APP_STATE.csrfToken = csrfToken;
+
+            try {
+                const data = await apiCall('/api/auth/session');
+                APP_STATE.user = data.user;
+                $('#loginPage').classList.add('hidden');
+                $('#appContainer').classList.remove('hidden');
+                return true;
+            } catch (error) {
+                localStorage.removeItem('token');
+                localStorage.removeItem('csrf_token');
+                $('#loginPage').classList.remove('hidden');
+                return false;
+            }
+        }
+
+        // ==================== UI CONTROLS ====================
+
+        function showLoading() {
+            $('#loadingOverlay').classList.add('active');
+        }
+
+        function hideLoading() {
+            $('#loadingOverlay').classList.remove('active');
+        }
+
+        function showToast(message, type = 'info', title = '') {
+            const container = $('#toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+
+            const icons = {
+                success: '<path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>',
+                error: '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>',
+                warning: '<path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>',
+                info: '<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>'
+            };
+
+            const titleText = title || type.charAt(0).toUpperCase() + type.slice(1);
+
+            toast.innerHTML = `
+                <div class="toast-icon">
+                    <svg viewBox="0 0 24 24">${icons[type]}</svg>
+                </div>
+                <div class="toast-content">
+                    <div class="toast-title">${titleText}</div>
+                    <div class="toast-message">${message}</div>
+                </div>
+                <button class="toast-close" onclick="this.parentElement.remove()">
+                    <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                </button>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.add('removing');
+                setTimeout(() => toast.remove(), 300);
+            }, 5000);
+        }
+
+        function showPage(pageName) {
+            APP_STATE.currentPage = pageName;
+
+            $$('.page').forEach(p => p.classList.remove('active'));
+            $(`#${pageName}Page`).classList.add('active');
+
+            $$('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.page === pageName) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Load page data
+            if (pageName === 'dashboard') loadDashboard();
+            else if (pageName === 'routers') loadRouters();
+            else if (pageName === 'rules') loadRules();
+            else if (pageName === 'logs') loadLogs();
+        }
+
+        function toggleTheme() {
+            APP_STATE.theme = APP_STATE.theme === 'light' ? 'dark' : 'light';
+            document.body.classList.toggle('dark');
+            localStorage.setItem('theme', APP_STATE.theme);
+        }
+
+        function openModal(modalId) {
+            $(modalId).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            $(modalId).classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function showConfirm(message, onConfirm) {
+            $('#confirmMessage').textContent = message;
+            openModal('#confirmModal');
+
+            const confirmBtn = $('#confirmOk');
+            const newBtn = confirmBtn.cloneNode(true);
+            confirmBtn.parentNode.replaceChild(newBtn, confirmBtn);
+
+            newBtn.onclick = () => {
+                closeModal('#confirmModal');
+                onConfirm();
+            };
+        }
+
+        // ==================== DASHBOARD ====================
+
+        async function loadDashboard() {
+            try {
+                const [stats, routers] = await Promise.all([
+                    apiCall('/api/stats'),
+                    apiCall('/api/routers')
+                ]);
+
+                APP_STATE.stats = stats;
+                APP_STATE.routers = routers.routers || [];
+
+                // Update stats cards
+                $('#statTotalQueries').textContent = formatNumber(stats.total_queries || 0);
+                $('#statBlockedQueries').textContent = formatNumber(stats.blocked_queries || 0);
+                $('#statAllowedQueries').textContent = formatNumber(stats.allowed_queries || 0);
+                $('#statActiveRules').textContent = formatNumber(stats.active_rules || 0);
+
+                // Update router count
+                const routerCount = APP_STATE.routers.length;
+                const routerCountEl = $('#routerCount');
+                if (routerCountEl) {
+                    routerCountEl.textContent = `${routerCount} Router${routerCount !== 1 ? 's' : ''} Connected`;
+                }
+
+                // Update last updated
+                updateLastUpdated();
+            } catch (error) {
+                showToast('Failed to load dashboard', 'error');
+            }
+        }
+
+        function updateLastUpdated() {
+            const lastUpdatedEl = $('#lastUpdated');
+            if (lastUpdatedEl && APP_STATE.stats.last_updated) {
+                lastUpdatedEl.textContent = 'Updated ' + formatRelativeTime(APP_STATE.stats.last_updated);
+            }
+        }
+
+        // ==================== ROUTER MANAGEMENT ====================
+
+        async function loadRouters() {
+            showLoading();
+            try {
+                const data = await apiCall('/api/routers');
+                APP_STATE.routers = data.routers || [];
+                renderRouters();
+            } catch (error) {
+                showToast('Failed to load routers', 'error');
+            } finally {
+                hideLoading();
+            }
+        }
+
+        function renderRouters(filter = '') {
+            const grid = $('#routersGrid');
+            const routers = APP_STATE.routers.filter(r =>
+                !filter || r.name.toLowerCase().includes(filter.toLowerCase())
+            );
+
+            $('#routerListCount').textContent = routers.length;
+
+            if (routers.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1/-1;">
+                        <div class="empty-state-icon">
+                            <svg viewBox="0 0 24 24"><path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/></svg>
+                        </div>
+                        <h3 class="empty-state-title">No routers found</h3>
+                        <p class="empty-state-description">Add your first router to get started</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = routers.map(router => {
+                const status = getRouterStatus(router);
+                const statusClass = status === 'Connected' ? 'success' : status === 'Warning' ? 'warning' : 'danger';
+                const statusIcon = status === 'Connected' ? '✓' : status === 'Warning' ? '⚠' : '✗';
+
+                return `
+                    <div class="router-card">
+                        <div class="router-card-header">
+                            <h3 class="router-card-name">${escapeHtml(router.name)}</h3>
+                            <span class="status-badge status-${statusClass}">${statusIcon} ${status}</span>
+                        </div>
+                        <div class="router-card-meta">
+                            <div class="router-card-id">${router.id}</div>
+                            ${router.subnet ? `<div class="router-card-subnet">${escapeHtml(router.subnet)}</div>` : ''}
+                        </div>
+                        ${router.description ? `<p class="router-card-description">${escapeHtml(router.description)}</p>` : ''}
+                        <div class="router-stats">
+                            <div class="router-stat">
+                                <span class="router-stat-label">Total</span>
+                                <span class="router-stat-value">${formatNumber(router.total_queries || 0)}</span>
+                            </div>
+                            <div class="router-stat">
+                                <span class="router-stat-label">Blocked</span>
+                                <span class="router-stat-value text-danger">${formatNumber(router.blocked_queries || 0)}</span>
+                            </div>
+                            <div class="router-stat">
+                                <span class="router-stat-label">Allowed</span>
+                                <span class="router-stat-value text-success">${formatNumber(router.allowed_queries || 0)}</span>
+                            </div>
+                        </div>
+                        <div class="router-card-actions">
+                            <button class="btn btn-sm btn-secondary" onclick="editRouter('${router.id}')">
+                                <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+                                Edit
+                            </button>
+                            <button class="btn btn-sm btn-danger" onclick="deleteRouter('${router.id}', '${escapeHtml(router.name)}')">
+                                <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function getRouterStatus(router) {
+            if (!router.last_seen) return 'Disconnected';
+            const secondsSince = Date.now() / 1000 - router.last_seen;
+            if (secondsSince < 300) return 'Connected';  // 5 min
+            if (secondsSince < 600) return 'Warning';     // 10 min
+            return 'Disconnected';
+        }
+
+        async function addRouter(e) {
+            e.preventDefault();
+
+            const name = $('#routerName').value.trim();
+            const subnet = $('#routerSubnet').value.trim();
+            const description = $('#routerDescription').value.trim();
+
+            if (!name) {
+                showToast('Router name is required', 'error');
+                return;
+            }
+
+            if (subnet && !validateCIDR(subnet)) {
+                showToast('Invalid CIDR notation', 'error');
+                return;
+            }
+
+            showLoading();
+            try {
+                await apiCall('/api/routers', {
+                    method: 'POST',
+                    body: JSON.stringify({ name, subnet, description })
+                });
+
+                $('#addRouterForm').reset();
+                showToast('Router added successfully', 'success');
+                loadRouters();
+            } catch (error) {
+                showToast(error.message || 'Failed to add router', 'error');
+            } finally {
+                hideLoading();
+            }
+        }
+
+        function editRouter(routerId) {
+            const router = APP_STATE.routers.find(r => r.id === routerId);
+            if (!router) return;
+
+            $('#editRouterId').value = router.id;
+            $('#editRouterName').value = router.name;
+            $('#editRouterSubnet').value = router.subnet || '';
+            $('#editRouterDescription').value = router.description || '';
+
+            openModal('#editRouterModal');
+        }
+
+        async function saveRouter(e) {
+            e.preventDefault();
+
+            const id = $('#editRouterId').value;
+            const name = $('#editRouterName').value.trim();
+            const subnet = $('#editRouterSubnet').value.trim();
+            const description = $('#editRouterDescription').value.trim();
+
+            if (!name) {
+                showToast('Router name is required', 'error');
+                return;
+            }
+
+            if (subnet && !validateCIDR(subnet)) {
+                showToast('Invalid CIDR notation', 'error');
+                return;
+            }
+
+            showLoading();
+            try {
+                await apiCall(`/api/routers/${id}`, {
+                    method: 'PUT',
+                    body: JSON.stringify({ name, subnet, description })
+                });
+
+                closeModal('#editRouterModal');
+                showToast('Router updated successfully', 'success');
+                loadRouters();
+            } catch (error) {
+                showToast(error.message || 'Failed to update router', 'error');
+            } finally {
+                hideLoading();
+            }
+        }
+
+        function deleteRouter(routerId, routerName) {
+            showConfirm(`Delete router "${routerName}"? This will also remove all associated rules.`, async () => {
+                showLoading();
+                try {
+                    await apiCall(`/api/routers/${routerId}`, { method: 'DELETE' });
+                    showToast('Router deleted successfully', 'success');
+                    loadRouters();
+                    if (APP_STATE.currentPage === 'rules') loadRules();
+                } catch (error) {
+                    showToast(error.message || 'Failed to delete router', 'error');
+                } finally {
+                    hideLoading();
+                }
+            });
+        }
+
+        // ==================== DNS RULES MANAGEMENT ====================
+
+        async function loadRules() {
+            showLoading();
+            try {
+                const [rulesData, routersData] = await Promise.all([
+                    apiCall('/api/rules'),
+                    apiCall('/api/routers')
+                ]);
+
+                APP_STATE.rules = rulesData.rules || [];
+                APP_STATE.routers = routersData.routers || [];
+
+                renderRules();
+                updateRouterSelectors();
+            } catch (error) {
+                showToast('Failed to load rules', 'error');
+            } finally {
+                hideLoading();
+            }
+        }
+
+        function renderRules(filter = {}) {
+            const tbody = $('#rulesTableBody');
+            let rules = APP_STATE.rules;
+
+            // Apply filters
+            if (filter.search) {
+                rules = rules.filter(r => r.domain.toLowerCase().includes(filter.search.toLowerCase()));
+            }
+            if (filter.action) {
+                rules = rules.filter(r => r.action === filter.action);
+            }
+            if (filter.router) {
+                rules = rules.filter(r => {
+                    if (r.scope === 'all') return true;
+                    return r.router_ids && r.router_ids.includes(filter.router);
+                });
+            }
+
+            const countEl = $('#rulesCount');
+            if (countEl) {
+                countEl.textContent = rules.length;
+            }
+
+            if (rules.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6">
+                            <div class="empty-state">
+                                <div class="empty-state-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+                                </div>
+                                <h3 class="empty-state-title">No rules configured</h3>
+                                <p class="empty-state-description">Create your first DNS filtering rule</p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = rules.map(rule => {
+                const actionClass = rule.action === 'block' ? 'danger' : rule.action === 'allow' ? 'success' : 'warning';
+                const actionLabel = rule.action.charAt(0).toUpperCase() + rule.action.slice(1);
+
+                let routerBadges = '';
+                if (rule.scope === 'all') {
+                    routerBadges = '<span class="badge badge-primary">All Routers</span>';
+                } else {
+                    const routerNames = rule.router_ids.map(id => {
+                        const router = APP_STATE.routers.find(r => r.id === id);
+                        return router ? router.name : id;
+                    });
+                    routerBadges = routerNames.map(name =>
+                        `<span class="badge badge-secondary">${escapeHtml(name)}</span>`
+                    ).join(' ');
+                }
+
+                return `
+                    <tr>
+                        <td>
+                            <div class="rule-domain">
+                                <strong>${escapeHtml(rule.domain)}</strong>
+                                ${rule.description ? `<div class="text-muted small">${escapeHtml(rule.description)}</div>` : ''}
+                            </div>
+                        </td>
+                        <td><span class="badge badge-${actionClass}">${actionLabel}</span></td>
+                        <td>${rule.action === 'redirect' && rule.redirect_ip ? escapeHtml(rule.redirect_ip) : '—'}</td>
+                        <td>${routerBadges}</td>
+                        <td><span class="badge ${rule.enabled ? 'badge-success' : 'badge-secondary'}">${rule.enabled ? 'Enabled' : 'Disabled'}</span></td>
+                        <td>
+                            <div class="table-actions">
+                                <button class="btn btn-sm btn-secondary" onclick="editRule('${rule.id}')" title="Edit rule">
+                                    <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+                                </button>
+                                <button class="btn btn-sm btn-danger" onclick="deleteRule('${rule.id}', '${escapeHtml(rule.domain)}')" title="Delete rule">
+                                    <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function updateRouterSelectors() {
+            // Update specific routers checkboxes
+            const checkboxContainer = $('#specificRoutersCheckboxes');
+            checkboxContainer.innerHTML = APP_STATE.routers.map(router => `
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" id="router_${router.id}" name="specificRouters" value="${router.id}">
+                    <label class="checkbox-label" for="router_${router.id}">${escapeHtml(router.name)}</label>
+                </div>
+            `).join('');
+
+            // Update single router dropdown
+            const singleSelect = $('#singleRouterSelect');
+            singleSelect.innerHTML = '<option value="">Select a router</option>' +
+                APP_STATE.routers.map(router =>
+                    `<option value="${router.id}">${escapeHtml(router.name)}</option>`
+                ).join('');
+
+            // Update filter dropdowns
+            const filterSelect = $('#filterByRouter');
+            if (filterSelect) {
+                filterSelect.innerHTML = '<option value="">All Routers</option>' +
+                    APP_STATE.routers.map(router =>
+                        `<option value="${router.id}">${escapeHtml(router.name)}</option>`
+                    ).join('');
+            }
+        }
+
+        function updateRuleScopeUI() {
+            const scope = document.querySelector('input[name="ruleScope"]:checked').value;
+            $('#specificRoutersContainer').style.display = scope === 'specific' ? 'block' : 'none';
+            $('#singleRouterContainer').style.display = scope === 'single' ? 'block' : 'none';
+        }
+
+        function updateRuleActionUI() {
+            const action = $('#ruleAction').value;
+            $('#redirectField').style.display = action === 'redirect' ? 'block' : 'none';
+        }
+
+        async function addRule(e) {
+            e.preventDefault();
+
+            const domain = $('#ruleDomain').value.trim();
+            const action = $('#ruleAction').value;
+            const redirectIp = $('#ruleRedirectIp').value.trim();
+            const description = $('#ruleDescription').value.trim();
+            const scope = document.querySelector('input[name="ruleScope"]:checked').value;
+
+            // Validation
+            if (!domain || !validateDomain(domain)) {
+                showToast('Please enter a valid domain', 'error');
+                return;
+            }
+
+            if (action === 'redirect' && !redirectIp) {
+                showToast('Redirect IP is required for redirect action', 'error');
+                return;
+            }
+
+            if (action === 'redirect' && !validateIP(redirectIp)) {
+                showToast('Please enter a valid IP address', 'error');
+                return;
+            }
+
+            // Collect router IDs based on scope
+            let routerIds = [];
+            if (scope === 'specific') {
+                const checkboxes = document.querySelectorAll('input[name="specificRouters"]:checked');
+                routerIds = Array.from(checkboxes).map(cb => cb.value);
+                if (routerIds.length === 0) {
+                    showToast('Please select at least one router', 'error');
+                    return;
+                }
+            } else if (scope === 'single') {
+                const routerId = $('#singleRouterSelect').value;
+                if (!routerId) {
+                    showToast('Please select a router', 'error');
+                    return;
+                }
+                routerIds = [routerId];
+            }
+
+            const payload = {
+                domain,
+                action,
+                scope,
+                router_ids: routerIds,
+                description
+            };
+
+            if (action === 'redirect') {
+                payload.redirect_ip = redirectIp;
+            }
+
+            showLoading();
+            try {
+                await apiCall('/api/rules', {
+                    method: 'POST',
+                    body: JSON.stringify(payload)
+                });
+
+                $('#addRuleForm').reset();
+                updateRuleScopeUI();
+                updateRuleActionUI();
+                showToast('Rule created successfully', 'success');
+                loadRules();
+            } catch (error) {
+                showToast(error.message || 'Failed to create rule', 'error');
+            } finally {
+                hideLoading();
+            }
+        }
+
+        function editRule(ruleId) {
+            const rule = APP_STATE.rules.find(r => r.id === ruleId);
+            if (!rule) return;
+
+            $('#editRuleId').value = rule.id;
+            $('#editRuleDomain').value = rule.domain;
+            $('#editRuleAction').value = rule.action;
+            $('#editRuleRedirectIp').value = rule.redirect_ip || '';
+            $('#editRuleDescription').value = rule.description || '';
+            $('#editRuleEnabled').checked = rule.enabled;
+
+            // Show/hide redirect field
+            $('#editRedirectField').style.display = rule.action === 'redirect' ? 'block' : 'none';
+
+            openModal('#editRuleModal');
+        }
+
+        async function saveRule(e) {
+            e.preventDefault();
+
+            const id = $('#editRuleId').value;
+            const domain = $('#editRuleDomain').value.trim();
+            const action = $('#editRuleAction').value;
+            const redirectIp = $('#editRuleRedirectIp').value.trim();
+            const description = $('#editRuleDescription').value.trim();
+            const enabled = $('#editRuleEnabled').checked;
+
+            if (!domain || !validateDomain(domain)) {
+                showToast('Please enter a valid domain', 'error');
+                return;
+            }
+
+            if (action === 'redirect' && !redirectIp) {
+                showToast('Redirect IP is required', 'error');
+                return;
+            }
+
+            if (action === 'redirect' && !validateIP(redirectIp)) {
+                showToast('Please enter a valid IP address', 'error');
+                return;
+            }
+
+            const payload = { domain, action, description, enabled };
+            if (action === 'redirect') {
+                payload.redirect_ip = redirectIp;
+            }
+
+            showLoading();
+            try {
+                await apiCall(`/api/rules/${id}`, {
+                    method: 'PUT',
+                    body: JSON.stringify(payload)
+                });
+
+                closeModal('#editRuleModal');
+                showToast('Rule updated successfully', 'success');
+                loadRules();
+            } catch (error) {
+                showToast(error.message || 'Failed to update rule', 'error');
+            } finally {
+                hideLoading();
+            }
+        }
+
+        function deleteRule(ruleId, domain) {
+            showConfirm(`Delete rule for "${domain}"?`, async () => {
+                showLoading();
+                try {
+                    await apiCall(`/api/rules/${ruleId}`, { method: 'DELETE' });
+                    showToast('Rule deleted successfully', 'success');
+                    loadRules();
+                } catch (error) {
+                    showToast(error.message || 'Failed to delete rule', 'error');
+                } finally {
+                    hideLoading();
+                }
+            });
+        }
+
+        // ==================== QUERY LOGS ====================
+
+        async function loadLogs(page = 1) {
+            showLoading();
+            try {
+                const limit = APP_STATE.logsPerPage;
+                const offset = (page - 1) * limit;
+
+                const data = await apiCall(`/api/logs?limit=${limit}&offset=${offset}`);
+                APP_STATE.logs = data.logs || [];
+                APP_STATE.totalLogs = data.total || 0;
+                APP_STATE.currentLogPage = page;
+
+                renderLogs();
+                renderLogsPagination();
+            } catch (error) {
+                showToast('Failed to load query logs', 'error');
+            } finally {
+                hideLoading();
+            }
+        }
+
+        function renderLogs() {
+            const tbody = $('#queryLogBody');
+
+            if (APP_STATE.logs.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="8">
+                            <div class="empty-state">
+                                <div class="empty-state-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                                </div>
+                                <h3 class="empty-state-title">No query logs</h3>
+                                <p class="empty-state-description">DNS queries will appear here</p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = APP_STATE.logs.map(log => {
+                const router = APP_STATE.routers.find(r => r.id === log.router_id);
+                const routerName = router ? router.name : log.router_id || 'Unknown';
+
+                let actionBadge = '';
+                if (log.action.includes('block')) {
+                    actionBadge = '<span class="badge badge-danger">Blocked</span>';
+                } else if (log.action.includes('redirect')) {
+                    actionBadge = '<span class="badge badge-warning">Redirected</span>';
+                } else if (log.action.includes('allow')) {
+                    actionBadge = '<span class="badge badge-success">Allowed</span>';
+                } else if (log.action === 'cached') {
+                    actionBadge = '<span class="badge badge-info">Cached</span>';
+                } else {
+                    actionBadge = '<span class="badge badge-secondary">Forwarded</span>';
+                }
+
+                return `
+                    <tr>
+                        <td>${formatDate(log.timestamp)}</td>
+                        <td><span class="badge badge-secondary">${escapeHtml(routerName)}</span></td>
+                        <td><code>${escapeHtml(log.domain)}</code></td>
+                        <td>${log.query_type || 'A'}</td>
+                        <td>${actionBadge}</td>
+                        <td><code class="small">${escapeHtml(log.response || '—')}</code></td>
+                        <td>${log.response_time ? log.response_time.toFixed(0) : '—'}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function renderLogsPagination() {
+            const totalPages = Math.ceil(APP_STATE.totalLogs / APP_STATE.logsPerPage);
+            const currentPage = APP_STATE.currentLogPage;
+
+            const start = (currentPage - 1) * APP_STATE.logsPerPage + 1;
+            const end = Math.min(currentPage * APP_STATE.logsPerPage, APP_STATE.totalLogs);
+
+            $('#paginationInfo').textContent = `Showing ${start}-${end} of ${APP_STATE.totalLogs}`;
+
+            $('#prevPageBtn').disabled = currentPage === 1;
+            $('#nextPageBtn').disabled = currentPage === totalPages;
+
+            const pagesContainer = $('#paginationPages');
+            let pages = [];
+
+            if (totalPages <= 7) {
+                pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+            } else {
+                if (currentPage <= 3) {
+                    pages = [1, 2, 3, 4, '...', totalPages];
+                } else if (currentPage >= totalPages - 2) {
+                    pages = [1, '...', totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
+                } else {
+                    pages = [1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages];
+                }
+            }
+
+            pagesContainer.innerHTML = pages.map(page => {
+                if (page === '...') {
+                    return '<span class="pagination-ellipsis">...</span>';
+                }
+                return `
+                    <button class="pagination-page ${page === currentPage ? 'active' : ''}" 
+                            onclick="loadLogs(${page})">${page}</button>
+                `;
+            }).join('');
+        }
+
+        // ==================== SEARCH & FILTER ====================
+
+        // Router search
+        const routerSearch = debounce((query) => {
+            renderRouters(query);
+        }, 300);
+
+        // Rule search
+        const ruleSearch = debounce((query) => {
+            const filter = { search: query };
+            const actionFilter = $('#filterByAction').value;
+            const routerFilter = $('#filterByRouter').value;
+            if (actionFilter) filter.action = actionFilter;
+            if (routerFilter) filter.router = routerFilter;
+            renderRules(filter);
+        }, 300);
+
+        // ==================== UTILITY ====================
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // ==================== HELP SYSTEM ====================
+
+        function initTooltips() {
+            // Close tooltips when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.help-icon') && !e.target.closest('.help-tooltip')) {
+                    $$('.help-tooltip').forEach(t => t.classList.remove('active'));
+                }
+            });
+
+            // Initialize help icons
+            $$('.help-icon').forEach(icon => {
+                icon.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const helpId = icon.dataset.help;
+                    const tooltip = document.getElementById(`help-${helpId}`);
+
+                    // Close other tooltips
+                    $$('.help-tooltip').forEach(t => {
+                        if (t !== tooltip) t.classList.remove('active');
+                    });
+
+                    if (tooltip) {
+                        tooltip.classList.toggle('active');
+
+                        // Position tooltip
+                        const rect = icon.getBoundingClientRect();
+                        const tooltipRect = tooltip.getBoundingClientRect();
+
+                        // Default position: below icon
+                        let top = rect.bottom + 10;
+                        let left = rect.left - 20;
+
+                        // Check right edge
+                        if (left + tooltipRect.width > window.innerWidth) {
+                            left = window.innerWidth - tooltipRect.width - 20;
+                        }
+
+                        // Check bottom edge
+                        if (top + tooltipRect.height > window.innerHeight) {
+                            top = rect.top - tooltipRect.height - 10;
+                        }
+
+                        tooltip.style.top = `${top + window.scrollY}px`;
+                        tooltip.style.left = `${left + window.scrollX}px`;
+                    }
+                });
+            });
+
+            // Close buttons
+            $$('.help-close').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const tooltip = btn.closest('.help-tooltip');
+                    if (tooltip) tooltip.classList.remove('active');
+                });
+            });
+        }
+
+        // ==================== UI CONTROLS ====================
+
+        function showLoading(show) {
+            const overlay = document.getElementById('loadingOverlay');
+            if (overlay) {
+                overlay.style.display = show ? 'flex' : 'none';
+            }
+        }
+
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            if (!container) return;
+
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.innerHTML = `
+                <div class="toast-icon">
+                    ${type === 'success' ? '<svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>' :
+                    type === 'error' ? '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>' :
+                        '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>'}
+                </div>
+                <div class="toast-content">${message}</div>
+                <button class="toast-close">&times;</button>
+            `;
+
+            container.appendChild(toast);
+
+            // Auto remove
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+
+            // Close button
+            toast.querySelector('.toast-close').addEventListener('click', () => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            });
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // ==================== VALIDATION SYSTEM ====================
+
+        function validateInput(input) {
+            const value = input.value.trim();
+            const type = input.dataset.validate;
+            let isValid = true;
+            let message = '';
+
+            if (input.hasAttribute('required') && !value) {
+                isValid = false;
+                message = 'This field is required';
+            } else if (value && type) {
+                switch (type) {
+                    case 'domain':
+                        if (!validateDomain(value)) {
+                            isValid = false;
+                            message = 'Invalid domain format (e.g., example.com)';
+                        }
+                        break;
+                    case 'ip':
+                        if (!validateIP(value)) {
+                            isValid = false;
+                            message = 'Invalid IP address format';
+                        }
+                        break;
+                    case 'cidr':
+                        if (!validateCIDR(value)) {
+                            isValid = false;
+                            message = 'Invalid CIDR format (e.g., 192.168.1.0/24)';
+                        }
+                        break;
+                }
+            }
+
+            // Update UI
+            if (isValid) {
+                input.classList.remove('is-invalid');
+                if (value) input.classList.add('is-valid');
+                else input.classList.remove('is-valid');
+            } else {
+                input.classList.remove('is-valid');
+                input.classList.add('is-invalid');
+
+                // Show error message
+                let feedback = input.nextElementSibling;
+                if (!feedback || !feedback.classList.contains('invalid-feedback')) {
+                    feedback = document.createElement('div');
+                    feedback.className = 'invalid-feedback';
+                    input.parentNode.insertBefore(feedback, input.nextSibling);
+                }
+                feedback.textContent = message;
+            }
+
+            return isValid;
+        }
+
+        function initValidation() {
+            // Add validation listeners
+            $$('input[data-validate], input[required]').forEach(input => {
+                input.addEventListener('blur', () => validateInput(input));
+                input.addEventListener('input', () => {
+                    if (input.classList.contains('is-invalid')) {
+                        validateInput(input);
+                    }
+                });
+            });
+        }
+
+        // ==================== EVENT LISTENERS ====================
+
+        function initEventListeners() {
+            // Login
+            $('#loginForm').addEventListener('submit', handleLogin);
+            $('#logoutBtn').addEventListener('click', handleLogout);
+
+            // Navigation
+            $$('.nav-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const page = link.dataset.page;
+                    if (page) showPage(page);
+
+                    // Close mobile menu if open
+                    $('#mainNav').classList.remove('active');
+                });
+            });
+
+            // Mobile menu
+            const mobileBtn = $('#mobileMenuBtn');
+            if (mobileBtn) {
+                mobileBtn.addEventListener('click', () => {
+                    $('#mainNav').classList.toggle('active');
+                    const expanded = $('#mainNav').classList.contains('active');
+                    mobileBtn.setAttribute('aria-expanded', expanded);
+                });
+            }
+
+            // Initialize tooltips
+            initTooltips();
+
+            // Initialize validation
+            initValidation();
+
+            // Theme toggle
+            $('#themeToggleBtn').addEventListener('click', toggleTheme);
+
+            // Routers
+            $('#addRouterForm').addEventListener('submit', addRouter);
+            $('#editRouterForm').addEventListener('submit', saveRouter);
+            $('#refreshRoutersBtn').addEventListener('click', loadRouters);
+            $('#routerSearchInput').addEventListener('input', (e) => routerSearch(e.target.value));
+            $('#routerSearchClear').addEventListener('click', () => {
+                $('#routerSearchInput').value = '';
+                renderRouters();
+            });
+
+            // Rules
+            $('#addRuleForm').addEventListener('submit', addRule);
+            $('#editRuleForm').addEventListener('submit', saveRule);
+            $('#refreshRulesBtn').addEventListener('click', loadRules);
+
+            // Rule scope changes
+            $$('input[name="ruleScope"]').forEach(radio => {
+                radio.addEventListener('change', updateRuleScopeUI);
+            });
+
+            // Rule action changes
+            $('#ruleAction').addEventListener('change', updateRuleActionUI);
+            $('#editRuleAction').addEventListener('change', () => {
+                const action = $('#editRuleAction').value;
+                $('#editRedirectField').style.display = action === 'redirect' ? 'block' : 'none';
+            });
+
+            // Rule search & filters
+            $('#ruleSearchInput').addEventListener('input', (e) => ruleSearch(e.target.value));
+            $('#ruleSearchClear').addEventListener('click', () => {
+                $('#ruleSearchInput').value = '';
+                renderRules();
+            });
+            $('#filterByAction').addEventListener('change', () => {
+                const filter = {
+                    search: $('#ruleSearchInput').value,
+                    action: $('#filterByAction').value,
+                    router: $('#filterByRouter').value
+                };
+                renderRules(filter);
+            });
+            $('#filterByRouter').addEventListener('change', () => {
+                const filter = {
+                    search: $('#ruleSearchInput').value,
+                    action: $('#filterByAction').value,
+                    router: $('#filterByRouter').value
+                };
+                renderRules(filter);
+            });
+
+            // Logs
+            $('#refreshLogsBtn').addEventListener('click', () => loadLogs());
+            $('#prevPageBtn').addEventListener('click', () => loadLogs(APP_STATE.currentLogPage - 1));
+            $('#nextPageBtn').addEventListener('click', () => loadLogs(APP_STATE.currentLogPage + 1));
+
+            // Modals
+            $('#closeEditRouterModal').addEventListener('click', () => closeModal('#editRouterModal'));
+            $('#cancelEditRouter').addEventListener('click', () => closeModal('#editRouterModal'));
+
+            $('#closeEditRuleModal').addEventListener('click', () => closeModal('#editRuleModal'));
+            $('#cancelEditRule').addEventListener('click', () => closeModal('#editRuleModal'));
+
+            $('#closeConfirmModal').addEventListener('click', () => closeModal('#confirmModal'));
+            $('#confirmCancel').addEventListener('click', () => closeModal('#confirmModal'));
+
+            // Close modal on backdrop click
+            $$('.modal').forEach(modal => {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        closeModal('#' + modal.id);
+                    }
+                });
+            });
+
+            // Escape key to close modals
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    $$('.modal.active').forEach(modal => {
+                        closeModal('#' + modal.id);
+                    });
+                }
+            });
+        }
+
+        // ==================== INITIALIZATION ====================
+
+        async function init() {
+            // Apply saved theme
+            if (APP_STATE.theme === 'dark') {
+                document.body.classList.add('dark');
+            }
+
+            // Initialize event listeners
+            initEventListeners();
+
+            // Check authentication
+            const isAuth = await checkAuth();
+
+            if (isAuth) {
+                // Load initial page
+                showPage('dashboard');
+
+                // Auto-refresh dashboard every 30 seconds
+                setInterval(() => {
+                    if (APP_STATE.currentPage === 'dashboard') {
+                        loadDashboard();
+                    }
+                }, 30000);
+            }
+        }
+
+        // Start application
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    </script>
+</body>
+
+</html>
