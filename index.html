@@ -3351,737 +3351,28 @@
         </header>
 
         <!-- Main Content -->
-        <main>
-            <!-- ==================== DASHBOARD PAGE ==================== -->
-            <div id="dashboardPage" class="page active">
-                <div class="page-header">
-                    <div class="page-header-content">
-                        <h1 class="page-title">Dashboard</h1>
-                        <p class="page-description">Real-time overview of your DNS infrastructure and network activity
-                        </p>
-                        <!-- BUG-060: Last updated timestamp -->
-                        <div class="last-updated" id="dashboardLastUpdated">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
-                            </svg>
-                            <span>Last updated: <span id="lastUpdateTime">--</span></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Stats Cards -->
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-info">
-                                <div class="stat-label">Total Queries</div>
-                                <div class="stat-value" id="statTotalQueries">0</div>
-                                <div class="stat-subtitle">Since server start</div>
-                            </div>
-                            <div class="stat-icon">
-                                <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path
-                                        d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" />
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-info">
-                                <div class="stat-label">Blocked</div>
-                                <div class="stat-value text-danger" id="statBlockedQueries">0</div>
-                                <div class="stat-subtitle"><span id="statBlockedPercent">0</span>% blocked rate</div>
-                            </div>
-                            <div class="stat-icon danger">
-                                <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path
-                                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-info">
-                                <div class="stat-label">Allowed</div>
-                                <div class="stat-value text-success" id="statAllowedQueries">0</div>
-                                <div class="stat-subtitle"><span id="statAllowedPercent">0</span>% allowed rate</div>
-                            </div>
-                            <div class="stat-icon success">
-                                <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-info">
-                                <div class="stat-label">Cache Hit Rate</div>
-                                <div class="stat-value text-info" id="statCacheHitRate">0%</div>
-                                <div class="stat-subtitle"><span id="statCachedQueries">0</span> cached</div>
-                            </div>
-                            <div class="stat-icon info">
-                                <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path
-                                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-14h2v7h-2zm0 8h2v2h-2z" />
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Live Query Log -->
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">
-                            <div class="card-title-icon">
-                                <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path
-                                        d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z" />
-                                </svg>
-                            </div>
-                            Live Query Log
-                            <span class="badge badge-info ml-auto" id="queryLogCount">0</span>
-                        </h2>
-                        <div class="card-actions">
-                            <button class="btn btn-secondary btn-sm" id="refreshQueriesBtn">
-                                <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path
-                                        d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" />
-                                </svg>
-                                Refresh
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- BUG-007: Filter bar for query logs -->
-                    <div class="filters-bar" id="queryFilters">
-                        <div class="filter-group">
-                            <label class="filter-label" for="filterDomain">Domain:</label>
-                            <input type="text" class="filter-input" id="filterDomain" placeholder="Search domain...">
-                        </div>
-                        <div class="filter-group">
-                            <label class="filter-label" for="filterAction">Status:</label>
-                            <select class="filter-select" id="filterAction">
-                                <option value="">All</option>
-                                <option value="blocked">Blocked</option>
-                                <option value="allowed">Allowed</option>
-                                <option value="redirect">Redirected</option>
-                                <option value="cached">Cached</option>
-                                <option value="forwarded">Forwarded</option>
-                            </select>
-                        </div>
-                        <div class="filter-group">
-                            <label class="filter-label" for="filterRouter">Router:</label>
-                            <select class="filter-select" id="filterRouter">
-                                <option value="">All Routers</option>
-                            </select>
-                        </div>
-                        <div class="filters-actions">
-                            <button class="btn btn-primary btn-sm" id="applyFiltersBtn">Apply</button>
-                            <button class="btn btn-ghost btn-sm" id="clearFiltersBtn">Clear</button>
-                        </div>
-                    </div>
-
-                    <div class="table-container">
-                        <table id="queryLogTable">
-                            <thead>
-                                <tr>
-                                    <th>Time</th>
-                                    <th>Router</th>
-                                    <th>Client IP</th>
-                                    <th>Domain</th>
-                                    <th>Type</th>
-                                    <th>Status</th>
-                                    <th>Response</th>
-                                    <th>Time (ms)</th>
-                                </tr>
-                            </thead>
-                            <tbody id="queryLogBody">
-                                <tr>
-                                    <td colspan="8">
-                                        <div class="empty-state">
-                                            <div class="spinner spinner-primary"></div>
-                                            <p class="mt-4 text-muted">Loading queries...</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- BUG-009: Pagination -->
-                    <div class="pagination" id="queryPagination">
-                        <span class="pagination-info" id="paginationInfo">Showing 0 of 0</span>
-                        <button class="pagination-btn" id="prevPageBtn" disabled aria-label="Previous page">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
-                            </svg>
-                        </button>
-                        <div class="pagination-pages" id="paginationPages"></div>
-                        <button class="pagination-btn" id="nextPageBtn" disabled aria-label="Next page">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ==================== ROUTERS PAGE ==================== -->
-            <div id="routersPage" class="page">
-                <div class="page-header">
-                    <div class="page-header-content">
-                        <h1 class="page-title">Router Management</h1>
-                        <p class="page-description">Monitor and manage all connected routers in your network</p>
-                    </div>
-                    <!-- BUG-016: Search for routers -->
-                    <div class="search-box" id="routerSearchBox">
-                        <input type="text" class="search-input" id="routerSearchInput" placeholder="Search routers...">
-                        <svg class="search-icon" viewBox="0 0 24 24">
-                            <path
-                                d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
-                        </svg>
-                        <button class="search-clear" id="routerSearchClear" aria-label="Clear search">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Add Router Form -->
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">
-                            <div class="card-title-icon">
-                                <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
-                                </svg>
-                            </div>
-                            Add New Router
-                        </h2>
-                    </div>
-                    <form id="addRouterForm">
-                        <div class="form-row-3">
-                            <div class="form-group">
-                                <label class="form-label required" for="routerName">Router Name</label>
-                                <input type="text" class="form-input" id="routerName" placeholder="e.g., Home Router"
-                                    required maxlength="100">
-                                <span class="form-hint">A friendly name for this router</span>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="routerSubnet">Subnet (CIDR)</label>
-                                <input type="text" class="form-input" id="routerSubnet" data-validate="cidr"
-                                    placeholder="e.g., 192.168.1.0/24">
-                                <span class="form-hint">Network range in CIDR notation</span>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="routerDescription">Description</label>
-                                <input type="text" class="form-input" id="routerDescription"
-                                    placeholder="e.g., Main home network" maxlength="255">
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary" id="addRouterBtn">
-                            <svg viewBox="0 0 24 24" aria-hidden="true">
-                                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
-                            </svg>
-                            Add Router
-                        </button>
-                    </form>
-                </div>
-
-                <!-- Routers List -->
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">
-                            <div class="card-title-icon">
-                                <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path
-                                        d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z" />
-                                </svg>
-                            </div>
-                            Connected Routers
-                            <span class="badge badge-info" id="routerListCount">0</span>
-                        </h2>
-                        <button class="btn btn-secondary btn-sm" id="refreshRoutersBtn">
-                            <svg viewBox="0 0 24 24" aria-hidden="true">
-                                <path
-                                    d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" />
-                            </svg>
-                            Refresh
-                        </button>
-                    </div>
-                    <div class="routers-grid" id="routersGrid">
-                        <!-- Router cards rendered by JavaScript -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- ==================== RULES PAGE ==================== -->
-            <div id="rulesPage" class="page">
-                <div class="page-header">
-                    <div class="page-header-content">
-                        <h1 class="page-title">DNS Rules Management</h1>
-                        <p class="page-description">Create granular DNS filtering rules with flexible router targeting
-                        </p>
-                    </div>
-                    <!-- BUG-016: Search for rules -->
-                    <div class="search-box" id="ruleSearchBox">
-                        <input type="text" class="search-input" id="ruleSearchInput" placeholder="Search rules...">
-                        <svg class="search-icon" viewBox="0 0 24 24">
-                            <path
-                                d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
-                        </svg>
-                        <button class="search-clear" id="ruleSearchClear" aria-label="Clear search">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Add Rule Form -->
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">
-                            <div class="card-title-icon">
-                                <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
-                                </svg>
-                            </div>
-                            Add DNS Rule
-                            <span class="help-icon" data-help="add-rule">?</span>
-                        </h2>
-                    </div>
-                    <form id="addRuleForm">
-                        <div class="form-group">
-                            <label class="form-label required" for="ruleDomain">
-                                Domain / Pattern
-                                <span class="help-icon" data-help="domain">?</span>
-                            </label>
-                            <input type="text" class="form-input" id="ruleDomain" required data-validate="domain"
-                                placeholder="e.g., example.com or *.ads.example.com" maxlength="253">
-                        </div>
-
-                        <div class="form-row-2">
-                            <div class="form-group">
-                                <label class="form-label required" for="ruleAction">
-                                    Action
-                                    <span class="help-icon" data-help="action">?</span>
-                                </label>
-                                <select class="form-select" id="ruleAction" required>
-                                    <option value="block">Block</option>
-                                    <option value="allow">Allow</option>
-                                    <option value="redirect">Redirect</option>
-                                </select>
-                            </div>
-                            <div class="form-group redirect-field" id="redirectField">
-                                <label class="form-label required" for="ruleRedirectIp">
-                                    Redirect IP
-                                    <span class="help-icon" data-help="redirect">?</span>
-                                </label>
-                                <input type="text" class="form-input" id="ruleRedirectIp" data-validate="ip"
-                                    placeholder="e.g., 192.168.1.100" maxlength="45">
-                            </div>
-                        </div>
-
-                        <div class="scope-selector">
-                            <label class="form-label required">
-                                Router Scope
-                                <span class="help-icon" data-help="scope">?</span>
-                            </label>
-                            <div class="scope-options">
-                                <div class="scope-option">
-                                    <input type="radio" name="ruleScope" id="scopeAll" value="all" checked>
-                                    <label class="scope-option-label" for="scopeAll">
-                                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                                            <path
-                                                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-                                        </svg>
-                                        <span>All Routers</span>
-                                        <span class="scope-option-desc">Global rule</span>
-                                    </label>
-                                </div>
-                                <div class="scope-option">
-                                    <input type="radio" name="ruleScope" id="scopeSpecific" value="specific">
-                                    <label class="scope-option-label" for="scopeSpecific">
-                                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                                            <path
-                                                d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9h-4v4h-2v-4H9V9h4V5h2v4h4v2z" />
-                                        </svg>
-                                        <span>Multiple Routers</span>
-                                        <span class="scope-option-desc">Select multiple</span>
-                                    </label>
-                                </div>
-                                <div class="scope-option">
-                                    <input type="radio" name="ruleScope" id="scopeSingle" value="single">
-                                    <label class="scope-option-label" for="scopeSingle">
-                                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                                            <path
-                                                d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z" />
-                                        </svg>
-                                        <span>Single Router</span>
-                                        <span class="scope-option-desc">One router only</span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <!-- Router selectors container - shown/hidden based on scope -->
-                            <div class="router-selector" id="specificRoutersContainer" style="display: none;">
-                                <label class="form-label">Select Routers (one or more)</label>
-                                <div class="router-checkboxes" id="specificRoutersCheckboxes"></div>
-                            </div>
-
-                            <div class="router-selector" id="singleRouterContainer" style="display: none;">
-                                <label class="form-label">Select Router</label>
-                                <select class="form-select" id="singleRouterSelect">
-                                    <option value="">Choose a router...</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label" for="ruleDescription">Description (Optional)</label>
-                            <input type="text" class="form-input" id="ruleDescription"
-                                placeholder="Brief description of this rule" maxlength="255">
-                        </div>
-
-                        <button type="submit" class="btn btn-primary" id="addRuleBtn">
-                            <svg viewBox="0 0 24 24" aria-hidden="true">
-                                <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
-                            </svg>
-                            Create Rule
-                        </button>
-                    </form>
-                </div>
-
-                <!-- Rules List -->
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">
-                            <div class="card-title-icon">
-                                <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path
-                                        d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z" />
-                                </svg>
-                            </div>
-                            Active Rules
-                            <span class="badge badge-info" id="rulesCount">0</span>
-                            <span class="help-icon" data-help="active-rules">?</span>
-                        </h2>
-                        <div class="card-actions">
-                            <button class="btn btn-secondary btn-sm" id="refreshRulesBtn">
-                                <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path
-                                        d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" />
-                                </svg>
-                                Refresh
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- BUG-008: Rules filter bar -->
-                    <div class="filters-bar" id="rulesFilters">
-                        <div class="filter-group">
-                            <label class="filter-label" for="filterByAction">Action:</label>
-                            <select class="filter-select" id="filterByAction">
-                                <option value="">All</option>
-                                <option value="block">Block</option>
-                                <option value="allow">Allow</option>
-                                <option value="redirect">Redirect</option>
-                            </select>
-                        </div>
-                        <div class="filter-group">
-                            <label class="filter-label" for="filterByRouter">Router:</label>
-                            <select class="filter-select" id="filterByRouter">
-                                <option value="">All Routers</option>
-                            </select>
-                        </div>
-                        <span class="help-icon" data-help="filters">?</span>
-                    </div>
-
-                    <!-- BUG-015: Bulk actions bar -->
-                    <div class="bulk-actions-bar" id="bulkActionsBar">
-                        <div class="bulk-actions-info">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-                            </svg>
-                            <span><span id="selectedCount">0</span> rules selected</span>
-                        </div>
-                        <div class="bulk-actions-buttons">
-                            <button class="btn btn-ghost btn-sm" id="clearSelectionBtn">Clear Selection</button>
-                            <button class="btn btn-danger btn-sm" id="bulkDeleteBtn">
-                                <svg viewBox="0 0 24 24">
-                                    <path
-                                        d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
-                                </svg>
-                                Delete Selected
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="table-container">
-                        <table id="rulesTable">
-                            <thead>
-                                <tr>
-                                    <!-- BUG-015: Checkbox column -->
-                                    <th class="checkbox-col">
-                                        <input type="checkbox" id="selectAllRules" aria-label="Select all rules">
-                                    </th>
-                                    <th>Domain</th>
-                                    <th>Action</th>
-                                    <th>Scope</th>
-                                    <th>Target Routers</th>
-                                    <th>Hits</th>
-                                    <th>Description</th>
-                                    <th class="text-center" style="width: 100px;">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="rulesTableBody">
-                                <!-- Rules rendered by JavaScript -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ==================== ANALYTICS PAGE ==================== -->
-            <!-- BUG-018: Enhanced analytics -->
-            <div id="analyticsPage" class="page">
-                <div class="page-header">
-                    <div class="page-header-content">
-                        <h1 class="page-title">Analytics & Reports</h1>
-                        <p class="page-description">Detailed insights into DNS queries and router performance</p>
-                    </div>
-                    <div class="card-actions">
-                        <button class="btn btn-secondary btn-sm" id="refreshAnalyticsBtn">
-                            <svg viewBox="0 0 24 24" aria-hidden="true">
-                                <path
-                                    d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" />
-                            </svg>
-                            Refresh
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Server Stats Overview -->
-                <div class="stats-grid mb-6">
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-info">
-                                <div class="stat-label">Uptime</div>
-                                <div class="stat-value sm" id="statUptime">0h 0m</div>
-                            </div>
-                            <div class="stat-icon">
-                                <svg viewBox="0 0 24 24">
-                                    <path
-                                        d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-info">
-                                <div class="stat-label">DNS Cache Size</div>
-                                <div class="stat-value sm" id="statCacheSize">0</div>
-                                <div class="stat-subtitle">entries cached</div>
-                            </div>
-                            <div class="stat-icon info">
-                                <svg viewBox="0 0 24 24">
-                                    <path
-                                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-info">
-                                <div class="stat-label">Active Sessions</div>
-                                <div class="stat-value sm" id="statActiveSessions">0</div>
-                            </div>
-                            <div class="stat-icon success">
-                                <svg viewBox="0 0 24 24">
-                                    <path
-                                        d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div class="stat-info">
-                                <div class="stat-label">Redirected</div>
-                                <div class="stat-value sm text-warning" id="statRedirectedQueries">0</div>
-                                <div class="stat-subtitle">queries redirected</div>
-                            </div>
-                            <div class="stat-icon warning">
-                                <svg viewBox="0 0 24 24">
-                                    <path d="M19 15l-6 6-1.42-1.42L15.17 16H4V4h2v10h9.17l-3.59-3.58L13 9l6 6z" />
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Per-Router Analytics -->
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">
-                            <div class="card-title-icon">
-                                <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path
-                                        d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z" />
-                                </svg>
-                            </div>
-                            Per-Router Analytics
-                        </h2>
-                    </div>
-                    <div id="routerAnalytics">
-                        <!-- Router analytics rendered by JavaScript -->
-                    </div>
-                </div>
-
-                <!-- Top Domains -->
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">
-                            <div class="card-title-icon">
-                                <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z" />
-                                </svg>
-                            </div>
-                            Top Queried Domains
-                        </h2>
-                    </div>
-                    <div id="topDomainsContainer">
-                        <!-- Top domains rendered by JavaScript -->
-                    </div>
-                </div>
-
-                <!-- Cache Management -->
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">
-                            <div class="card-title-icon">
-                                <svg viewBox="0 0 24 24" aria-hidden="true">
-                                    <path
-                                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
-                                </svg>
-                            </div>
-                            Cache Management
-                        </h2>
-                    </div>
-                    <p class="mb-4 text-muted">Clear the DNS cache to force fresh lookups for all domains. This will
-                        also clear cached rules.</p>
-                    <button class="btn btn-warning" id="clearCacheBtn">
-                        <svg viewBox="0 0 24 24" aria-hidden="true">
-                            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
-                        </svg>
-                        Clear DNS Cache
-                    </button>
-                </div>
-            </div>
-        </main>
     </div>
-
-    <!-- ==================== MODALS ==================== -->
-
-    <!-- Edit Router Modal -->
-    <div class="modal" id="editRouterModal" role="dialog" aria-labelledby="editRouterTitle" aria-modal="true">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title" id="editRouterTitle">Edit Router</h3>
-                <button class="modal-close" id="closeEditRouterModal" aria-label="Close modal">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path
-                            d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
-                    </svg>
-                </button>
-            </div>
-            <form id="editRouterForm">
-                <input type="hidden" id="editRouterId">
-                <div class="form-group">
-                    <label class="form-label required" for="editRouterName">Router Name</label>
-                    <input type="text" class="form-input" id="editRouterName" required maxlength="100">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="editRouterSubnet">Subnet (CIDR)</label>
-                    <input type="text" class="form-input" id="editRouterSubnet" data-validate="cidr"
-                        placeholder="e.g., 192.168.1.0/24">
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="editRouterDescription">Description</label>
-                    <input type="text" class="form-input" id="editRouterDescription" maxlength="255">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" id="cancelEditRouter">Cancel</button>
-                    <button type="submit" class="btn btn-primary" id="saveRouterBtn">Save Changes</button>
-                </div>
-            </form>
+    <div class="form-group" id="editRedirectField">
+        <label class="form-label" for="editRuleRedirectIp">Redirect IP</label>
+        <input type="text" class="form-input" id="editRuleRedirectIp" maxlength="45" data-validate="ip">
+    </div>
+    </div>
+    <div class="form-group">
+        <label class="form-label" for="editRuleDescription">Description</label>
+        <input type="text" class="form-input" id="editRuleDescription" maxlength="255">
+    </div>
+    <div class="form-group">
+        <div class="checkbox-wrapper">
+            <input type="checkbox" id="editRuleEnabled" checked>
+            <label class="checkbox-label" for="editRuleEnabled">Rule is enabled</label>
         </div>
     </div>
-
-    <!-- Edit Rule Modal -->
-    <div class="modal" id="editRuleModal" role="dialog" aria-labelledby="editRuleTitle" aria-modal="true">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title" id="editRuleTitle">Edit Rule</h3>
-                <button class="modal-close" id="closeEditRuleModal" aria-label="Close modal">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path
-                            d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
-                    </svg>
-                </button>
-            </div>
-            <form id="editRuleForm">
-                <input type="hidden" id="editRuleId">
-                <div class="form-group">
-                    <label class="form-label required" for="editRuleDomain">Domain / Pattern</label>
-                    <input type="text" class="form-input" id="editRuleDomain" required maxlength="253"
-                        data-validate="domain">
-                </div>
-                <div class="form-row-2">
-                    <div class="form-group">
-                        <label class="form-label required" for="editRuleAction">Action</label>
-                        <select class="form-select" id="editRuleAction" required>
-                            <option value="block">Block</option>
-                            <option value="allow">Allow</option>
-                            <option value="redirect">Redirect</option>
-                        </select>
-                    </div>
-                    <div class="form-group" id="editRedirectField">
-                        <label class="form-label" for="editRuleRedirectIp">Redirect IP</label>
-                        <input type="text" class="form-input" id="editRuleRedirectIp" maxlength="45" data-validate="ip">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="editRuleDescription">Description</label>
-                    <input type="text" class="form-input" id="editRuleDescription" maxlength="255">
-                </div>
-                <div class="form-group">
-                    <div class="checkbox-wrapper">
-                        <input type="checkbox" id="editRuleEnabled" checked>
-                        <label class="checkbox-label" for="editRuleEnabled">Rule is enabled</label>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" id="cancelEditRule">Cancel</button>
-                    <button type="submit" class="btn btn-primary" id="saveRuleBtn">Save Changes</button>
-                </div>
-            </form>
-        </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" id="cancelEditRule">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="saveRuleBtn">Save Changes</button>
+    </div>
+    </form>
+    </div>
     </div>
 
     <!-- Confirm Delete Modal -->
@@ -4320,89 +3611,6 @@
             } catch (error) {
                 console.error('API Error:', error);
                 throw error;
-            }
-        }
-
-        // ==================== AUTHENTICATION ====================
-
-        async function handleLogin(e) {
-            e.preventDefault();
-
-            const username = $('#loginUsername').value.trim();
-            const password = $('#loginPassword').value;
-            const remember = $('#rememberMe').checked;
-
-            if (!username || !password) {
-                showToast('Please enter username and password', 'error');
-                return;
-            }
-
-            showLoading();
-
-            try {
-                const data = await apiCall('/api/auth/login', {
-                    method: 'POST',
-                    body: JSON.stringify({ username, password, remember })
-                });
-
-                APP_STATE.token = data.token;
-                APP_STATE.csrfToken = data.csrf_token;
-                APP_STATE.user = { username };
-
-                localStorage.setItem('token', data.token);
-                localStorage.setItem('csrf_token', data.csrf_token);
-
-                hideLoading();
-                $('#loginPage').classList.add('hidden');
-                $('#appContainer').classList.remove('hidden');
-
-                showPage('dashboard');
-                loadDashboard();
-                showToast('Welcome back, ' + username + '!', 'success');
-            } catch (error) {
-                hideLoading();
-                showToast(error.message || 'Login failed', 'error');
-            }
-        }
-
-        function handleLogout() {
-            APP_STATE.token = null;
-            APP_STATE.csrfToken = null;
-            APP_STATE.user = null;
-
-            localStorage.removeItem('token');
-            localStorage.removeItem('csrf_token');
-
-            $('#appContainer').classList.add('hidden');
-            $('#loginPage').classList.remove('hidden');
-
-            // Reset form
-            $('#loginForm').reset();
-        }
-
-        async function checkAuth() {
-            const token = localStorage.getItem('token');
-            const csrfToken = localStorage.getItem('csrf_token');
-
-            if (!token) {
-                $('#loginPage').classList.remove('hidden');
-                return false;
-            }
-
-            APP_STATE.token = token;
-            APP_STATE.csrfToken = csrfToken;
-
-            try {
-                const data = await apiCall('/api/auth/session');
-                APP_STATE.user = data.user;
-                $('#loginPage').classList.add('hidden');
-                $('#appContainer').classList.remove('hidden');
-                return true;
-            } catch (error) {
-                localStorage.removeItem('token');
-                localStorage.removeItem('csrf_token');
-                $('#loginPage').classList.remove('hidden');
-                return false;
             }
         }
 
@@ -5333,12 +4541,19 @@
             });
         }
 
-        // ==================== EVENT LISTENERS ====================
+        function addListener(selector, event, handler) {
+            const el = $(selector);
+            if (el) {
+                el.addEventListener(event, handler);
+            } else {
+                console.warn(`Element not found: ${selector}`);
+            }
+        }
 
         function initEventListeners() {
             // Login
-            $('#loginForm').addEventListener('submit', handleLogin);
-            $('#logoutBtn').addEventListener('click', handleLogout);
+            addListener('#loginForm', 'submit', handleLogin);
+            addListener('#logoutBtn', 'click', handleLogout);
 
             // Navigation
             $$('.nav-link').forEach(link => {
@@ -5348,7 +4563,8 @@
                     if (page) showPage(page);
 
                     // Close mobile menu if open
-                    $('#mainNav').classList.remove('active');
+                    const nav = $('#mainNav');
+                    if (nav) nav.classList.remove('active');
                 });
             });
 
@@ -5356,9 +4572,12 @@
             const mobileBtn = $('#mobileMenuBtn');
             if (mobileBtn) {
                 mobileBtn.addEventListener('click', () => {
-                    $('#mainNav').classList.toggle('active');
-                    const expanded = $('#mainNav').classList.contains('active');
-                    mobileBtn.setAttribute('aria-expanded', expanded);
+                    const nav = $('#mainNav');
+                    if (nav) {
+                        nav.classList.toggle('active');
+                        const expanded = nav.classList.contains('active');
+                        mobileBtn.setAttribute('aria-expanded', expanded);
+                    }
                 });
             }
 
@@ -5369,22 +4588,23 @@
             initValidation();
 
             // Theme toggle
-            $('#themeToggleBtn').addEventListener('click', toggleTheme);
+            addListener('#themeToggleBtn', 'click', toggleTheme);
 
             // Routers
-            $('#addRouterForm').addEventListener('submit', addRouter);
-            $('#editRouterForm').addEventListener('submit', saveRouter);
-            $('#refreshRoutersBtn').addEventListener('click', loadRouters);
-            $('#routerSearchInput').addEventListener('input', (e) => routerSearch(e.target.value));
-            $('#routerSearchClear').addEventListener('click', () => {
-                $('#routerSearchInput').value = '';
+            addListener('#addRouterForm', 'submit', addRouter);
+            addListener('#editRouterForm', 'submit', saveRouter);
+            addListener('#refreshRoutersBtn', 'click', loadRouters);
+            addListener('#routerSearchInput', 'input', (e) => routerSearch(e.target.value));
+            addListener('#routerSearchClear', 'click', () => {
+                const input = $('#routerSearchInput');
+                if (input) input.value = '';
                 renderRouters();
             });
 
             // Rules
-            $('#addRuleForm').addEventListener('submit', addRule);
-            $('#editRuleForm').addEventListener('submit', saveRule);
-            $('#refreshRulesBtn').addEventListener('click', loadRules);
+            addListener('#addRuleForm', 'submit', addRule);
+            addListener('#editRuleForm', 'submit', saveRule);
+            addListener('#refreshRulesBtn', 'click', loadRules);
 
             // Rule scope changes
             $$('input[name="ruleScope"]').forEach(radio => {
@@ -5392,49 +4612,57 @@
             });
 
             // Rule action changes
-            $('#ruleAction').addEventListener('change', updateRuleActionUI);
-            $('#editRuleAction').addEventListener('change', () => {
-                const action = $('#editRuleAction').value;
-                $('#editRedirectField').style.display = action === 'redirect' ? 'block' : 'none';
+            addListener('#ruleAction', 'change', updateRuleActionUI);
+            addListener('#editRuleAction', 'change', () => {
+                const actionEl = $('#editRuleAction');
+                const field = $('#editRedirectField');
+                if (actionEl && field) {
+                    field.style.display = actionEl.value === 'redirect' ? 'block' : 'none';
+                }
             });
 
             // Rule search & filters
-            $('#ruleSearchInput').addEventListener('input', (e) => ruleSearch(e.target.value));
-            $('#ruleSearchClear').addEventListener('click', () => {
-                $('#ruleSearchInput').value = '';
+            addListener('#ruleSearchInput', 'input', (e) => ruleSearch(e.target.value));
+            addListener('#ruleSearchClear', 'click', () => {
+                const input = $('#ruleSearchInput');
+                if (input) input.value = '';
                 renderRules();
             });
-            $('#filterByAction').addEventListener('change', () => {
+
+            const updateRulesFilter = () => {
+                const searchInput = $('#ruleSearchInput');
+                const actionInput = $('#filterByAction');
+                const routerInput = $('#filterByRouter');
+
                 const filter = {
-                    search: $('#ruleSearchInput').value,
-                    action: $('#filterByAction').value,
-                    router: $('#filterByRouter').value
+                    search: searchInput ? searchInput.value : '',
+                    action: actionInput ? actionInput.value : '',
+                    router: routerInput ? routerInput.value : ''
                 };
                 renderRules(filter);
-            });
-            $('#filterByRouter').addEventListener('change', () => {
-                const filter = {
-                    search: $('#ruleSearchInput').value,
-                    action: $('#filterByAction').value,
-                    router: $('#filterByRouter').value
-                };
-                renderRules(filter);
-            });
+            };
+
+            addListener('#filterByAction', 'change', updateRulesFilter);
+            addListener('#filterByRouter', 'change', updateRulesFilter);
 
             // Logs
-            $('#refreshLogsBtn').addEventListener('click', () => loadLogs());
-            $('#prevPageBtn').addEventListener('click', () => loadLogs(APP_STATE.currentLogPage - 1));
-            $('#nextPageBtn').addEventListener('click', () => loadLogs(APP_STATE.currentLogPage + 1));
+            addListener('#refreshQueriesBtn', 'click', () => loadLogs());
+            addListener('#prevPageBtn', 'click', () => loadLogs(APP_STATE.currentLogPage - 1));
+            addListener('#nextPageBtn', 'click', () => loadLogs(APP_STATE.currentLogPage + 1));
+
+            // Analytics
+            addListener('#refreshAnalyticsBtn', 'click', () => loadDashboard());
+            addListener('#clearCacheBtn', 'click', clearCache);
 
             // Modals
-            $('#closeEditRouterModal').addEventListener('click', () => closeModal('#editRouterModal'));
-            $('#cancelEditRouter').addEventListener('click', () => closeModal('#editRouterModal'));
+            addListener('#closeEditRouterModal', 'click', () => closeModal('#editRouterModal'));
+            addListener('#cancelEditRouter', 'click', () => closeModal('#editRouterModal'));
 
-            $('#closeEditRuleModal').addEventListener('click', () => closeModal('#editRuleModal'));
-            $('#cancelEditRule').addEventListener('click', () => closeModal('#editRuleModal'));
+            addListener('#closeEditRuleModal', 'click', () => closeModal('#editRuleModal'));
+            addListener('#cancelEditRule', 'click', () => closeModal('#editRuleModal'));
 
-            $('#closeConfirmModal').addEventListener('click', () => closeModal('#confirmModal'));
-            $('#confirmCancel').addEventListener('click', () => closeModal('#confirmModal'));
+            addListener('#closeConfirmModal', 'click', () => closeModal('#confirmModal'));
+            addListener('#confirmCancel', 'click', () => closeModal('#confirmModal'));
 
             // Close modal on backdrop click
             $$('.modal').forEach(modal => {

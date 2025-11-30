@@ -86,7 +86,7 @@ DNS_CACHE_DEFAULT_TTL = 300
 
 DEFAULT_CONFIG = {
     "dns": {
-        "port": 53,
+        "port": 5300,
         "upstream_servers": ["1.1.1.1", "8.8.8.8", "9.9.9.9"],
         "timeout": 3,
         "block_response": "0.0.0.0",
@@ -3188,19 +3188,11 @@ def analytics_task():
 def print_banner():
     """Print startup banner"""
     banner = f"""
-╔══════════════════════════════════════════════════════════════════════╗
-║                                                                      ║
-║   ███╗   ██╗███████╗████████╗ ██████╗ ██╗   ██╗ █████╗ ██████╗ ██████╗║
-║   ████╗  ██║██╔════╝╚══██╔══╝██╔════╝ ██║   ██║██╔══██╗██╔══██╗██╔══██║
-║   ██╔██╗ ██║█████╗     ██║   ██║  ███╗██║   ██║███████║██████╔╝██║  ██║
-║   ██║╚██╗██║██╔══╝     ██║   ██║   ██║██║   ██║██╔══██║██╔══██╗██║  ██║
-║   ██║ ╚████║███████╗   ██║   ╚██████╔╝╚██████╔╝██║  ██║██║  ██║██████╔╝
-║   ╚═╝  ╚═══╝╚══════╝   ╚═╝    ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝║
-║                                                                      ║
-║              Enterprise DNS Management System v{VERSION}               ║
-║                  Phase 2: Features & Performance                     ║
-║                                                                      ║
-╚══════════════════════════════════════════════════════════════════════╝
+======================================================================
+                   NetGuard Enterprise DNS System
+             Enterprise DNS Management System v{VERSION}
+                 Phase 2: Features & Performance
+======================================================================
 """
     print(banner)
 
@@ -3247,11 +3239,11 @@ def main():
     """Main entry point"""
     print_banner()
     
-    # Check system requirements
-    check_startup_requirements()
-    
     # Load configuration
     load_config()
+
+    # Check system requirements
+    check_startup_requirements()
     
     # Initialize database
     init_database()
