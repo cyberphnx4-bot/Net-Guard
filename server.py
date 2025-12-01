@@ -86,7 +86,7 @@ DNS_CACHE_DEFAULT_TTL = 300
 
 DEFAULT_CONFIG = {
     "dns": {
-        "port": 5300,
+        "port": 53,
         "upstream_servers": ["1.1.1.1", "8.8.8.8", "9.9.9.9"],
         "timeout": 3,
         "block_response": "0.0.0.0",
@@ -3297,3 +3297,4 @@ if __name__ == '__main__':
     except Exception as e:
         logger.critical(f"Fatal error: {e}")
         sys.exit(1)
+
