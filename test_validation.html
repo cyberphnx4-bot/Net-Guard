@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Validation Tests</title>
+    <style>
+        body { font-family: sans-serif; }
+        .test-case { margin: 10px; padding: 5px; border: 1px solid #ccc; }
+        .pass { background-color: #90ee90; }
+        .fail { background-color: #ffcccb; }
+    </style>
+</head>
+<body>
+    <h1>Validation Logic Tests</h1>
+    <div id="results"></div>
+
+    <script>
+        // Functions to be tested (copied from index.html)
+        function validateIP(ip) {
+            const ipv4Pattern = /^((\d{1,3}\.){3}\d{1,3})$/;
+            const ipv6Pattern = /^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:))$/;
+
+            if (ipv4Pattern.test(ip) && ip.split('.').every(part => parseInt(part, 10) <= 255)) {
+                return true;
+            }
+
+            return ipv6Pattern.test(ip);
+        }
+
+        function validateCIDR(cidr) {
+            const parts = cidr.split('/');
+            if (parts.length !== 2) return false;
+
+            const ip = parts[0];
+            const prefix = parseInt(parts[1], 10);
+
+            if (isNaN(prefix)) return false;
+
+            if (validateIP(ip)) {
+                // Check prefix range based on IP version
+                const isIPv6 = ip.includes(':');
+                const maxPrefix = isIPv6 ? 128 : 32;
+                return prefix >= 0 && prefix <= maxPrefix;
+            }
+
+            return false;
+        }
+
+        // Test runner
+        const resultsContainer = document.getElementById('results');
+        let testsPassed = 0;
+        let testsFailed = 0;
+
+        function assert(description, condition) {
+            const testCase = document.createElement('div');
+            testCase.className = 'test-case';
+            testCase.textContent = description + ': ';
+            if (condition) {
+                testCase.classList.add('pass');
+                testCase.textContent += 'PASS';
+                testsPassed++;
+            } else {
+                testCase.classList.add('fail');
+                testCase.textContent += 'FAIL';
+                testsFailed++;
+            }
+            resultsContainer.appendChild(testCase);
+        }
+
+        // --- Tests for validateIP ---
+        assert('Valid IPv4', validateIP('192.168.1.1'));
+        assert('Invalid IPv4 (out of range)', !validateIP('256.0.0.0'));
+        assert('Valid IPv6 (full)', validateIP('2001:0db8:85a3:0000:0000:8a2e:0370:7334'));
+        assert('Valid IPv6 (compressed)', validateIP('2001:db8::8a2e:370:7334'));
+        assert('Valid IPv6 (localhost)', validateIP('::1'));
+        assert('Invalid IPv6', !validateIP('not-an-ip'));
+        assert('Invalid string', !validateIP('192.168.1.1.1'));
+
+        // --- Tests for validateCIDR ---
+        assert('Valid IPv4 CIDR', validateCIDR('192.168.1.0/24'));
+        assert('Invalid IPv4 CIDR (bad prefix)', !validateCIDR('192.168.1.0/33'));
+        assert('Valid IPv6 CIDR', validateCIDR('2001:db8::/32'));
+        assert('Valid IPv6 CIDR (large prefix)', validateCIDR('2001:db8::/128'));
+        assert('Invalid IPv6 CIDR (bad prefix)', !validateCIDR('2001:db8::/129'));
+        assert('Invalid CIDR (bad IP)', !validateCIDR('not-an-ip/24'));
+
+        // --- Summary ---
+        const summary = document.createElement('h2');
+        summary.textContent = `Tests complete. Passed: ${testsPassed}, Failed: ${testsFailed}`;
+        resultsContainer.prepend(summary);
+
+    </script>
+</body>
+</html>
