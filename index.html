@@ -3560,19 +3560,33 @@
         }
 
         function validateIP(ip) {
-            // IPv4
-            const ipv4Pattern = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
-            // IPv6 (simplified)
-            const ipv6Pattern = /^(([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}|::)$/;
-            return ipv4Pattern.test(ip) || ipv6Pattern.test(ip);
+            const ipv4Pattern = /^((\d{1,3}\.){3}\d{1,3})$/;
+            const ipv6Pattern = /^(([0-9a-fA-F]{1,4}:){7,7}[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,7}:|([0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}|([0-9a-fA-F]{1,4}:){1,5}(:[0-9a-fA-F]{1,4}){1,2}|([0-9a-fA-F]{1,4}:){1,4}(:[0-9a-fA-F]{1,4}){1,3}|([0-9a-fA-F]{1,4}:){1,3}(:[0-9a-fA-F]{1,4}){1,4}|([0-9a-fA-F]{1,4}:){1,2}(:[0-9a-fA-F]{1,4}){1,5}|[0-9a-fA-F]{1,4}:((:[0-9a-fA-F]{1,4}){1,6})|:((:[0-9a-fA-F]{1,4}){1,7}|:))$/;
+
+            if (ipv4Pattern.test(ip) && ip.split('.').every(part => parseInt(part, 10) <= 255)) {
+                return true;
+            }
+
+            return ipv6Pattern.test(ip);
         }
 
         function validateCIDR(cidr) {
             const parts = cidr.split('/');
             if (parts.length !== 2) return false;
-            if (!validateIP(parts[0])) return false;
-            const prefix = parseInt(parts[1]);
-            return prefix >= 0 && prefix <= 32;
+
+            const ip = parts[0];
+            const prefix = parseInt(parts[1], 10);
+
+            if (isNaN(prefix)) return false;
+
+            if (validateIP(ip)) {
+                // Check prefix range based on IP version
+                const isIPv6 = ip.includes(':');
+                const maxPrefix = isIPv6 ? 128 : 32;
+                return prefix >= 0 && prefix <= maxPrefix;
+            }
+
+            return false;
         }
 
         // ==================== API LAYER ====================
